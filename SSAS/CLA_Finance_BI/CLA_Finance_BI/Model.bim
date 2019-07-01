@@ -1,0 +1,1886 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1400,
+  "model": {
+    "culture": "en-GB",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "azdbsvr02-preprd-dev-dxdw.database.windows.net",
+            "database": "datawarehouse_dev"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "UsernamePassword",
+          "kind": "SQL",
+          "path": "azdbsvr02-preprd-dev-dxdw.database.windows.net;datawarehouse_dev",
+          "Username": "cla_etl",
+          "EncryptConnection": true
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "Account",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Account Code",
+            "dataType": "string",
+            "sourceColumn": "Account Code"
+          },
+          {
+            "name": "Account Name",
+            "dataType": "string",
+            "sourceColumn": "Account Name"
+          },
+          {
+            "name": "Expense High Level Account",
+            "dataType": "string",
+            "sourceColumn": "Expense High Level Account"
+          },
+          {
+            "name": "TB_Mapping",
+            "dataType": "string",
+            "sourceColumn": "TB_Mapping"
+          },
+          {
+            "name": "Expense Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Expense Ranking"
+          },
+          {
+            "name": "TB Ranking",
+            "dataType": "int64",
+            "sourceColumn": "TB Ranking"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinAccount = Source{[Schema=\"dim\",Item=\"FinAccount\"]}[Data]",
+                "in",
+                "    dim_FinAccount"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Department",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Department Code",
+            "dataType": "string",
+            "sourceColumn": "Department Code"
+          },
+          {
+            "name": "Department Type",
+            "dataType": "string",
+            "sourceColumn": "Department Type"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinDepartment = Source{[Schema=\"dim\",Item=\"FinDepartment\"]}[Data]",
+                "in",
+                "    dim_FinDepartment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Expense Cost Type",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Expense Cost Type",
+            "dataType": "string",
+            "sourceColumn": "Expense Cost Type"
+          },
+          {
+            "name": "DW_CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_CreatedDate"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinExpenseCostType = Source{[Schema=\"dim\",Item=\"FinExpenseCostType\"]}[Data]",
+                "in",
+                "    dim_FinExpenseCostType"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Fee Category",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Fee Category Code",
+            "dataType": "string",
+            "sourceColumn": "Fee Category Code"
+          },
+          {
+            "name": "Fee Category",
+            "dataType": "string",
+            "sourceColumn": "Fee Category"
+          },
+          {
+            "name": "DW_CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_CreatedDate"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          },
+          {
+            "type": "calculated",
+            "name": "Fee Category Code SAP",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": " IF('Fee Category'[Fee Category Code]=\"XL\",\"XA\",\"\" )"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinFeeCategory = Source{[Schema=\"dim\",Item=\"FinFeeCategory\"]}[Data]",
+                "in",
+                "    dim_FinFeeCategory"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Income Sector",
+        "columns": [
+          {
+            "name": "Income Sector",
+            "dataType": "string",
+            "sourceColumn": "Income Sector"
+          },
+          {
+            "name": "Income SubSector",
+            "dataType": "string",
+            "sourceColumn": "Income SubSector"
+          },
+          {
+            "name": "Income Sector Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Income Sector Ranking"
+          },
+          {
+            "name": "Income SubSector Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Income SubSector Ranking"
+          },
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinIncomeSector = Source{[Schema=\"dim\",Item=\"FinIncomeSector\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dim_FinIncomeSector,{\"DW_ModifiedDate\", \"DW_CreatedDate\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Income Type",
+        "columns": [
+          {
+            "name": "Income Type",
+            "dataType": "string",
+            "sourceColumn": "Income Type"
+          },
+          {
+            "name": "Income Type Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Income Type Ranking"
+          },
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinIncomeType = Source{[Schema=\"dim\",Item=\"FinIncomeType\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dim_FinIncomeType,{\"DW_ModifiedDate\", \"DW_CreatedDate\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "License Fee Country",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country"
+          },
+          {
+            "name": "Country Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Country Ranking"
+          },
+          {
+            "name": "DW_CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_CreatedDate"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinLicenseFeeCountry = Source{[Schema=\"dim\",Item=\"FinLicenseFeeCountry\"]}[Data]",
+                "in",
+                "    dim_FinLicenseFeeCountry"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Title Type",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Title Type Code",
+            "dataType": "string",
+            "sourceColumn": "Title Type Code"
+          },
+          {
+            "name": "Title Type",
+            "dataType": "string",
+            "sourceColumn": "Title Type"
+          },
+          {
+            "name": "DW_CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_CreatedDate"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinTitleType = Source{[Schema=\"dim\",Item=\"FinTitleType\"]}[Data]",
+                "in",
+                "    dim_FinTitleType"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Undistributed Funds",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Undistributed Account Code",
+            "dataType": "string",
+            "sourceColumn": "Undistributed Account Code"
+          },
+          {
+            "name": "Undistributed Fee Categorisation",
+            "dataType": "string",
+            "sourceColumn": "Undistributed Fee Categorisation"
+          },
+          {
+            "name": "Undistributed Fee Country",
+            "dataType": "string",
+            "sourceColumn": "Undistributed Fee Country"
+          },
+          {
+            "name": "Undistributed SubSector",
+            "dataType": "string",
+            "sourceColumn": "Undistributed SubSector"
+          },
+          {
+            "name": "Fee Categorisation Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Fee Categorisation Ranking"
+          },
+          {
+            "name": "Fee Country Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Fee Country Ranking"
+          },
+          {
+            "name": "SubSector Ranking",
+            "dataType": "int64",
+            "sourceColumn": "SubSector Ranking"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinUndistributedFunds = Source{[Schema=\"dim\",Item=\"FinUndistributedFunds\"]}[Data]",
+                "in",
+                "    dim_FinUndistributedFunds"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Distribution Sector",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Distribution Sector",
+            "dataType": "string",
+            "sourceColumn": "Distribution Sector"
+          },
+          {
+            "name": "Distribution SubSector",
+            "dataType": "string",
+            "sourceColumn": "Distribution SubSector"
+          },
+          {
+            "name": "Distributions Mapping",
+            "dataType": "string",
+            "sourceColumn": "Distributions Mapping"
+          },
+          {
+            "name": "Distribution Sector Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Distribution Sector Ranking"
+          },
+          {
+            "name": "Distribution SubSector Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Distribution SubSector Ranking"
+          },
+          {
+            "name": "Distributions_Mapping_Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Distributions_Mapping_Ranking"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinDistributionSector = Source{[Schema=\"dim\",Item=\"FinDistributionSector\"]}[Data]",
+                "in",
+                "    dim_FinDistributionSector"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim FinDate",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "Date"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day"
+          },
+          {
+            "name": "Month Number",
+            "dataType": "int64",
+            "sourceColumn": "Month Number"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month",
+            "sortByColumn": "Month Number"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year"
+          },
+          {
+            "name": "Fin Year",
+            "dataType": "string",
+            "sourceColumn": "Fin Year"
+          },
+          {
+            "name": "Quarter Number",
+            "dataType": "int64",
+            "sourceColumn": "Quarter Number"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "string",
+            "sourceColumn": "Quarter"
+          },
+          {
+            "name": "Week",
+            "dataType": "int64",
+            "sourceColumn": "Week"
+          },
+          {
+            "name": "FirstOfMonth",
+            "dataType": "dateTime",
+            "sourceColumn": "FirstOfMonth"
+          },
+          {
+            "name": "FirstOfYear",
+            "dataType": "dateTime",
+            "sourceColumn": "FirstOfYear"
+          },
+          {
+            "name": "Style112",
+            "dataType": "string",
+            "sourceColumn": "Style112"
+          },
+          {
+            "name": "Style101",
+            "dataType": "string",
+            "sourceColumn": "Style101"
+          },
+          {
+            "name": "AbsEntry",
+            "dataType": "string",
+            "sourceColumn": "AbsEntry"
+          },
+          {
+            "name": "Period Code",
+            "dataType": "string",
+            "sourceColumn": "Period Code"
+          },
+          {
+            "name": "Period Name",
+            "dataType": "string",
+            "sourceColumn": "Period Name"
+          },
+          {
+            "name": "F_RefDate",
+            "dataType": "dateTime",
+            "sourceColumn": "F_RefDate"
+          },
+          {
+            "name": "T_RefDate",
+            "dataType": "dateTime",
+            "sourceColumn": "T_RefDate"
+          },
+          {
+            "type": "calculated",
+            "name": "Current Month",
+            "dataType": "boolean",
+            "isDataTypeInferred": true,
+            "expression": " IF(MONTH('dim FinDate'[Date])=MONTH(TODAY()),true, false)",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculated",
+            "name": "IsToday",
+            "dataType": "boolean",
+            "isDataTypeInferred": true,
+            "expression": "IF(TODAY()='dim FinDate'[Date], true,false)",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculated",
+            "name": "Calendar Year",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": " Year([Date])"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinDate = Source{[Schema=\"dim\",Item=\"FinDate\"]}[Data]",
+                "in",
+                "    dim_FinDate"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "CurrentMonthNumber",
+            "expression": " CALCULATE(MAX('dim FinDate'[Month Number]), FILTER(all('dim FinDate'), 'dim FinDate'[Date] = [ToDate]))",
+            "formatString": "0"
+          },
+          {
+            "name": "ToDate",
+            "expression": " IF(MAX(Dates[Date]) < CALCULATE(MAX(Dates[Date]), ALL('Dates')), MAX(Dates[Date]), TODAY())"
+          },
+          {
+            "name": "Current Year",
+            "expression": " CALCULATE(MAX('dim FinDate'[Year]), FILTER(all('dim FinDate'), 'dim FinDate'[Date] = [ToDate]))  ",
+            "formatString": "0"
+          }
+        ]
+      },
+      {
+        "name": "Licence Type",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Licence Type Code",
+            "dataType": "string",
+            "sourceColumn": "Licence Type Code"
+          },
+          {
+            "name": "Licence Type",
+            "dataType": "string",
+            "sourceColumn": "Licence Type"
+          },
+          {
+            "name": "DW_CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_CreatedDate"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          },
+          {
+            "type": "calculated",
+            "name": "Renewal?",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": " IF([Licence Type Code]IN{\"L40\", \"L41\"},\"New\", \"Renewal\")"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinLicenceType = Source{[Schema=\"dim\",Item=\"FinLicenceType\"]}[Data]",
+                "in",
+                "    dim_FinLicenceType"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Transactions",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "TransId",
+            "dataType": "int64",
+            "sourceColumn": "TransId"
+          },
+          {
+            "name": "Line_ID",
+            "dataType": "int64",
+            "sourceColumn": "Line_ID"
+          },
+          {
+            "name": "Account",
+            "dataType": "int64",
+            "sourceColumn": "Account"
+          },
+          {
+            "name": "Fee Category",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Fee Category"
+          },
+          {
+            "name": "Licence Type",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Licence Type"
+          },
+          {
+            "name": "Title Type",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Title Type"
+          },
+          {
+            "name": "Department",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Department"
+          },
+          {
+            "name": "Income Sector",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Income Sector"
+          },
+          {
+            "name": "Income Type",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Income Type"
+          },
+          {
+            "name": "Country",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Country"
+          },
+          {
+            "name": "Distribution Sector",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Distribution Sector"
+          },
+          {
+            "name": "Undistributed Account Code",
+            "dataType": "int64",
+            "sourceColumn": "Undistributed Account Code"
+          },
+          {
+            "name": "Expense Cost Type",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Expense Cost Type"
+          },
+          {
+            "name": "AdminFeePercent",
+            "dataType": "double",
+            "sourceColumn": "AdminFeePercent",
+            "displayFolder": "Admin Fee"
+          },
+          {
+            "name": "Posting Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Posting Date"
+          },
+          {
+            "name": "Debit",
+            "dataType": "double",
+            "sourceColumn": "Debit"
+          },
+          {
+            "name": "Credit",
+            "dataType": "double",
+            "sourceColumn": "Credit"
+          },
+          {
+            "name": "Contract Account",
+            "dataType": "string",
+            "sourceColumn": "Contract Account"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Invoice Number",
+            "dataType": "string",
+            "sourceColumn": "Invoice Number"
+          },
+          {
+            "name": "Invoice Reference",
+            "dataType": "string",
+            "sourceColumn": "Invoice Reference"
+          },
+          {
+            "name": "Document Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Document Date",
+            "displayFolder": "Forecast"
+          },
+          {
+            "name": "VAT Group",
+            "dataType": "string",
+            "sourceColumn": "VAT Group"
+          },
+          {
+            "name": "VAT Amount",
+            "dataType": "double",
+            "sourceColumn": "VAT Amount"
+          },
+          {
+            "name": "BaseSum",
+            "dataType": "double",
+            "sourceColumn": "BaseSum"
+          },
+          {
+            "name": "Income Budget",
+            "dataType": "decimal",
+            "sourceColumn": "Income Budget",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Income Daily Budget",
+            "dataType": "decimal",
+            "sourceColumn": "Income Daily Budget",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Income Forecast",
+            "dataType": "decimal",
+            "sourceColumn": "Income Forecast",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Income Daily Forecast",
+            "dataType": "decimal",
+            "sourceColumn": "Income Daily Forecast",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Expenses Budget",
+            "dataType": "decimal",
+            "sourceColumn": "Expenses Budget",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Expenses Daily Budget",
+            "dataType": "decimal",
+            "sourceColumn": "Expenses Daily Budget",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Expenses Forecast",
+            "dataType": "decimal",
+            "sourceColumn": "Expenses Forecast",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "Expenses Daily Forecast",
+            "dataType": "decimal",
+            "sourceColumn": "Expenses Daily Forecast",
+            "displayFolder": "Budget"
+          },
+          {
+            "name": "RecordType",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "RecordType"
+          },
+          {
+            "type": "calculated",
+            "name": "Admin Fee %",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": [
+              " ",
+              "IF (",
+              "AND (",
+              "RELATED ( 'Account'[Account Code] )",
+              "IN { \"5006\", \"5007\", \"5009\", \"5011\", \"5021\", \"5026\", \"5031\", \"5041\" },",
+              "RELATED ( 'Licence Type'[Renewal?] ) = \"Renewal\"",
+              "),",
+              "0.075,",
+              "IF (",
+              "AND (",
+              "RELATED ( 'Account'[Account Code] )",
+              "IN { \"5006\", \"5007\", \"5009\", \"5011\", \"5021\", \"5026\", \"5031\", \"5041\" },",
+              "RELATED ( 'Licence Type'[Renewal?] ) = \"New\"",
+              "),",
+              "0.15,",
+              "IF (",
+              "AND (",
+              "RELATED ( 'Account'[Account Code] ) IN { \"5045\", \"5140\", \"5220\" },",
+              "RELATED ( 'Licence Type'[Renewal?] ) = \"Renewal\"",
+              "),",
+              "0.11,",
+              "IF (",
+              "AND (",
+              "RELATED ( 'Account'[Account Code] ) IN { \"5045\", \"5140\", \"5220\" },",
+              "RELATED ( 'Licence Type'[Renewal?] ) = \"New\"",
+              "),",
+              "0.25,",
+              "IF (",
+              "RELATED ( 'Title Type'[Title Type] ) = \"S450\",",
+              "0,",
+              "IF ( RELATED ( 'Licence Type'[Renewal?] ) = \"Renewal\", 0.11, 0.4 )",
+              ")",
+              ")",
+              ")",
+              ")",
+              ")"
+            ],
+            "displayFolder": "Admin Fee"
+          },
+          {
+            "type": "calculated",
+            "name": "Admin Fee Actual",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": "[Actual]*'Transactions'[Admin Fee %]",
+            "displayFolder": "Admin Fee"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    fact_vwFinTransaction = Source{[Schema=\"fact\",Item=\"vwFinTransaction\"]}[Data]",
+                "in",
+                "    fact_vwFinTransaction"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Actual",
+            "expression": [
+              " sum('Transactions'[Debit]) + sum('Transactions'[Credit])",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual CM",
+            "expression": [
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual Income (Date Range)",
+            "expression": [
+              " ",
+              "VAR minDate=CALCULATE(Min(Dates[Date]))",
+              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
+              "return ",
+              "CALCULATE(",
+              "[Actual]",
+              ",",
+              "'Transactions'[Posting Date] >= minDate && 'Transactions'[Posting Date] <= maxDate",
+              ") ",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual Income (PY Date Range)",
+            "expression": [
+              " ",
+              "var minDate=CALCULATE(Min(Dates[Date]))",
+              "VAR prevMinDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(minDate), month('dim FinDate'[Date])= month(minDate), 'dim FinDate'[Calendar Year]=year(minDate)-1)",
+              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
+              "",
+              "VAR prevMaxDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(maxDate), month('dim FinDate'[date])= month(maxDate), 'dim FinDate'[Calendar Year]=year(maxDate)-1)",
+              "return ",
+              "CALCULATE(",
+              "[Actual]",
+              ", 'Transactions'[Posting Date]>= prevMinDate && 'Transactions'[Posting Date] <= prevMaxDate",
+              ") ",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual Net",
+            "expression": [
+              " [Actual CM]-[Admin Fee CM]",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual PY",
+            "expression": [
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual PYTD",
+            "expression": [
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1 && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual TD",
+            "expression": [
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Date] <= [ToDate]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Actual YTD",
+            "expression": [
+              " CALCULATE([Actual], FILTER(ALL('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Date] <= [ToDate]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Credit CM",
+            "expression": " IF([Admin Fee CM]<0,[Admin Fee CM]*-1)",
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Cumulative Income PY",
+            "expression": [
+              "",
+              "CALCULATE([Income PY],filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <=Max('dim FinDate'[Date])))"
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Debit CM",
+            "expression": [
+              " IF([Admin Fee CM]>0,[Admin Fee CM])",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income PY",
+            "expression": [
+              " CALCULATE([Actual],DATEADD('dim FinDate'[Date],-1,YEAR))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Net (CM)",
+            "expression": [
+              " [Actual CM] - [Admin Fee CM]",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Admin Fee CM",
+            "expression": [
+              " CALCULATE(SUM([Admin Fee Actual]), FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Admin Fee",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Admin Fee YTD",
+            "expression": [
+              " CALCULATE(SUM([Admin Fee Actual]), FILTER(ALL('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Date] <= [ToDate]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Admin Fee",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Cumulative Budget",
+            "expression": [
+              " CALCULATE(SUM([Income Daily Budget]),filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <= MAX('dim FinDate'[Date]))",
+              ")"
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Cumulative Budget PY",
+            "expression": [
+              " ",
+              "CALCULATE([Income Budget PY New],filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <=MAX('dim FinDate'[Date])))"
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income Budget CM",
+            "expression": [
+              " CALCULATE(SUM('Transactions'[Income Daily Budget]), FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income Budget Full Year",
+            "expression": [
+              " CALCULATE(sum('Transactions'[Income Daily Budget]), FILTER(all('dim FinDate'), 'dim FinDate'[Year]=[Current Year]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income Budget PY",
+            "expression": [
+              " CALCULATE(Sum([Income Budget]),DATEADD('dim FinDate'[Date],-1,YEAR))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income Budget PY New",
+            "expression": [
+              " CALCULATE(SUM([Income Daily Budget]),SAMEPERIODLASTYEAR('dim FinDate'[Date]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income Budget PYTD",
+            "expression": [
+              " CALCULATE(Sum('Transactions'[Income Daily Budget]), FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1 && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income Budget(Date Range)",
+            "expression": [
+              " ",
+              "VAR minDate=CALCULATE(Min(Dates[Date]))",
+              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
+              "return ",
+              "CALCULATE(",
+              "Sum('Transactions'[Income Daily Budget])",
+              ", filter (",
+              "all('dim FinDate'[Date])",
+              ", 'dim FinDate'[Date] >= minDate && 'dim FinDate'[Date] <= maxDate",
+              ")",
+              ") ",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Income Budget(PY Date Range)",
+            "expression": [
+              " ",
+              "var minDate=CALCULATE(Min(Dates[Date]))",
+              "VAR prevMinDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(minDate), 'dim FinDate'[Month Number]= month(minDate), 'dim FinDate'[Calendar Year]=year(minDate)-1)",
+              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
+              "",
+              "VAR prevMaxDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(maxDate), 'dim FinDate'[Month Number]= month(maxDate), 'dim FinDate'[Calendar Year]=year(maxDate)-1)",
+              "return ",
+              "CALCULATE(",
+              "Sum('Transactions'[Income Daily Budget])",
+              ", filter (",
+              "all('dim FinDate'[Date])",
+              ", 'dim FinDate'[Date] >= prevMinDate && 'dim FinDate'[Date] <= prevMaxDate",
+              ")",
+              ") ",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Reforecast",
+            "expression": [
+              " sum('Transactions'[Income Daily Forecast])",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Reforecast CM",
+            "expression": [
+              " CALCULATE([Reforecast], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Reforecast Full Year",
+            "expression": [
+              " CALCULATE([Reforecast], FILTER(all('dim FinDate'), 'dim FinDate'[Year]=[Current Year]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Reforecast YTD",
+            "expression": [
+              " CALCULATE([Reforecast], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Budget",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Reforecast v Actual CM",
+            "expression": [
+              " [Actual CM] - [Reforecast CM]",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Variances",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Reforecast v Actual CM % change",
+            "expression": [
+              " DIVIDE([Actual CM] - [Reforecast CM],[Reforecast CM])",
+              ""
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "displayFolder": "Variances"
+          },
+          {
+            "name": "Reforecast v Actual YTD",
+            "expression": [
+              " [Actual YTD] - [Reforecast YTD]",
+              ""
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Variances",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Reforecast v Actual YTD % change",
+            "expression": [
+              " iF(ABS(DIVIDE([Actual YTD] - [Reforecast YTD],[Reforecast YTD]))>0.005,DIVIDE([Actual YTD] - [Reforecast YTD],[Reforecast YTD]))",
+              ""
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "displayFolder": "Variances"
+          },
+          {
+            "name": "Variance (Income vs. Budget)",
+            "expression": [
+              " [Actual Income (Date Range)]-SUM('Transactions'[Income Budget])",
+              ""
+            ],
+            "displayFolder": "Variances"
+          },
+          {
+            "name": "Variance % (Income vs. Budget)",
+            "expression": [
+              " DIVIDE([Variance (Income vs. Budget)],SUM('Transactions'[Income Budget]))",
+              ""
+            ],
+            "displayFolder": "Variances"
+          },
+          {
+            "name": "Cumulative Income",
+            "expression": [
+              " ",
+              "CALCULATE([Actual],filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <=MAX('dim FinDate'[Date])))"
+            ],
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Actual Income",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Dates",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": false,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[ToDate]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Month",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Month]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Calendar Year",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Calendar Year]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Financial Year",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Financial Year]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Week",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Week]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Month Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Month Number]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fin Year",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Fin Year]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": " SELECTCOLUMNS('dim FinDate', \"ToDate\", 'dim FinDate'[Date],\"Month\", 'dim FinDate'[Month], \"Calendar Year\", 'dim FinDate'[Calendar Year], \"Financial Year\", 'dim FinDate'[Year], \"Week\", 'dim FinDate'[Week], \"Month Number\",'dim FinDate'[Month Number],\"Fin Year\",'dim FinDate'[Fin Year])"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact FinFixedAsset",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "ItemCode",
+            "dataType": "string",
+            "sourceColumn": "ItemCode"
+          },
+          {
+            "name": "ItemName",
+            "dataType": "string",
+            "sourceColumn": "ItemName"
+          },
+          {
+            "name": "ItmsGrpCode",
+            "dataType": "int64",
+            "sourceColumn": "ItmsGrpCode"
+          },
+          {
+            "name": "AssetClass",
+            "dataType": "string",
+            "sourceColumn": "AssetClass"
+          },
+          {
+            "name": "AssetGroup",
+            "dataType": "string",
+            "sourceColumn": "AssetGroup"
+          },
+          {
+            "name": "AsstStatus",
+            "dataType": "string",
+            "sourceColumn": "AsstStatus"
+          },
+          {
+            "name": "CapDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CapDate"
+          },
+          {
+            "name": "AcqDate",
+            "dataType": "dateTime",
+            "sourceColumn": "AcqDate"
+          },
+          {
+            "name": "RetDate",
+            "dataType": "dateTime",
+            "sourceColumn": "RetDate"
+          },
+          {
+            "name": "DprStart",
+            "dataType": "dateTime",
+            "sourceColumn": "DprStart"
+          },
+          {
+            "name": "DprEnd",
+            "dataType": "dateTime",
+            "sourceColumn": "DprEnd"
+          },
+          {
+            "name": "OcrCode",
+            "dataType": "string",
+            "sourceColumn": "OcrCode"
+          },
+          {
+            "name": "APC",
+            "dataType": "double",
+            "sourceColumn": "APC"
+          },
+          {
+            "name": "CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CreatedDate"
+          },
+          {
+            "name": "DW_CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_CreatedDate"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    fact_FinFixedAsset = Source{[Schema=\"fact\",Item=\"FinFixedAsset\"]}[Data]",
+                "in",
+                "    fact_FinFixedAsset"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim vwFinExpenditureIncomeReportMapping",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id"
+          },
+          {
+            "name": "account code",
+            "dataType": "string",
+            "sourceColumn": "account code"
+          },
+          {
+            "name": "Header0",
+            "dataType": "string",
+            "sourceColumn": "Header0"
+          },
+          {
+            "name": "Header1",
+            "dataType": "string",
+            "sourceColumn": "Header1"
+          },
+          {
+            "name": "Header2",
+            "dataType": "string",
+            "sourceColumn": "Header2"
+          },
+          {
+            "name": "account name",
+            "dataType": "string",
+            "sourceColumn": "account name"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_vwFinExpenditureIncomeReportMapping = Source{[Schema=\"dim\",Item=\"vwFinExpenditureIncomeReportMapping\"]}[Data]",
+                "in",
+                "    dim_vwFinExpenditureIncomeReportMapping"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "5aa23bab-aae8-455a-a191-459543fc57e0",
+        "fromTable": "Transactions",
+        "fromColumn": "Department",
+        "toTable": "Department",
+        "toColumn": "Id"
+      },
+      {
+        "name": "3952f7d2-3ca9-4c78-9e41-9ae2b1d0b1d8",
+        "fromTable": "Transactions",
+        "fromColumn": "Country",
+        "toTable": "License Fee Country",
+        "toColumn": "Id"
+      },
+      {
+        "name": "4f6a1c28-93be-460e-81e9-71b32c5544ee",
+        "fromTable": "Transactions",
+        "fromColumn": "Title Type",
+        "toTable": "Title Type",
+        "toColumn": "Id"
+      },
+      {
+        "name": "ad151b0f-aaf2-4cc1-ae3e-761dad49be42",
+        "fromTable": "Transactions",
+        "fromColumn": "Licence Type",
+        "toTable": "Licence Type",
+        "toColumn": "Id"
+      },
+      {
+        "name": "b5811f49-062a-4782-bff3-9368387daa2a",
+        "fromTable": "Transactions",
+        "fromColumn": "Account",
+        "toTable": "Account",
+        "toColumn": "Id"
+      },
+      {
+        "name": "ee01c56f-6bb2-42d2-b2e9-cd949cf36827",
+        "fromTable": "Transactions",
+        "fromColumn": "Posting Date",
+        "toTable": "dim FinDate",
+        "toColumn": "Date"
+      },
+      {
+        "name": "d74878ca-761b-43d0-a49d-aa7521566bc8",
+        "fromTable": "Transactions",
+        "fromColumn": "Expense Cost Type",
+        "toTable": "Expense Cost Type",
+        "toColumn": "Id"
+      },
+      {
+        "name": "87d626dc-b416-4efa-8f8e-f824f9b7cab9",
+        "fromTable": "Transactions",
+        "fromColumn": "Fee Category",
+        "toTable": "Fee Category",
+        "toColumn": "Id"
+      },
+      {
+        "name": "f7c89a6e-7402-45c8-a4ce-f992315ba05e",
+        "fromTable": "Transactions",
+        "fromColumn": "Distribution Sector",
+        "toTable": "Distribution Sector",
+        "toColumn": "Id"
+      },
+      {
+        "name": "55c65793-e669-40e1-a50e-4a2134b975f9",
+        "fromTable": "Transactions",
+        "fromColumn": "Undistributed Account Code",
+        "toTable": "Undistributed Funds",
+        "toColumn": "Id"
+      },
+      {
+        "name": "c8710002-5c62-4921-927e-392f68a402c4",
+        "fromTable": "Transactions",
+        "fromColumn": "Income Type",
+        "toTable": "Income Type",
+        "toColumn": "Id"
+      },
+      {
+        "name": "556c9acf-f3c3-47d0-850f-3d0100005e67",
+        "fromTable": "Transactions",
+        "fromColumn": "Income Sector",
+        "toTable": "Income Sector",
+        "toColumn": "Id"
+      },
+      {
+        "name": "2d201d94-f640-4e84-9a31-2414a06be18b",
+        "fromTable": "Transactions",
+        "fromColumn": "Account",
+        "toTable": "dim vwFinExpenditureIncomeReportMapping",
+        "toColumn": "id"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Admin",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "obj:6c68cfc0-6be5-482e-b6af-3228b594b85d@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:6c68cfc0-6be5-482e-b6af-3228b594b85d@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "500"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
