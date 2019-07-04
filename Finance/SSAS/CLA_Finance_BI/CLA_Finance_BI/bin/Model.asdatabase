@@ -19,8 +19,6 @@
         },
         "credential": {
           "AuthenticationKind": "UsernamePassword",
-          "kind": "SQL",
-          "path": "azdbsvr02-preprd-dev-dxdw.database.windows.net;datawarehouse_dev",
           "Username": "cla_etl",
           "EncryptConnection": true
         }
@@ -33,6 +31,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
@@ -89,6 +88,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
@@ -131,16 +131,6 @@
             "name": "Expense Cost Type",
             "dataType": "string",
             "sourceColumn": "Expense Cost Type"
-          },
-          {
-            "name": "DW_CreatedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_CreatedDate"
-          },
-          {
-            "name": "DW_ModifiedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_ModifiedDate"
           }
         ],
         "partitions": [
@@ -166,6 +156,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
@@ -177,16 +168,6 @@
             "name": "Fee Category",
             "dataType": "string",
             "sourceColumn": "Fee Category"
-          },
-          {
-            "name": "DW_CreatedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_CreatedDate"
-          },
-          {
-            "name": "DW_ModifiedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_ModifiedDate"
           },
           {
             "type": "calculated",
@@ -219,12 +200,14 @@
           {
             "name": "Income Sector",
             "dataType": "string",
-            "sourceColumn": "Income Sector"
+            "sourceColumn": "Income Sector",
+            "sortByColumn": "Income Sector Ranking"
           },
           {
             "name": "Income SubSector",
             "dataType": "string",
-            "sourceColumn": "Income SubSector"
+            "sourceColumn": "Income SubSector",
+            "sortByColumn": "Income SubSector Ranking"
           },
           {
             "name": "Income Sector Ranking",
@@ -239,6 +222,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           }
         ],
@@ -266,7 +250,8 @@
           {
             "name": "Income Type",
             "dataType": "string",
-            "sourceColumn": "Income Type"
+            "sourceColumn": "Income Type",
+            "sortByColumn": "Income Type Ranking"
           },
           {
             "name": "Income Type Ranking",
@@ -276,6 +261,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           }
         ],
@@ -303,27 +289,19 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
             "name": "Country",
             "dataType": "string",
-            "sourceColumn": "Country"
+            "sourceColumn": "Country",
+            "sortByColumn": "Country Ranking"
           },
           {
             "name": "Country Ranking",
             "dataType": "int64",
             "sourceColumn": "Country Ranking"
-          },
-          {
-            "name": "DW_CreatedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_CreatedDate"
-          },
-          {
-            "name": "DW_ModifiedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_ModifiedDate"
           }
         ],
         "partitions": [
@@ -349,6 +327,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
@@ -360,16 +339,6 @@
             "name": "Title Type",
             "dataType": "string",
             "sourceColumn": "Title Type"
-          },
-          {
-            "name": "DW_CreatedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_CreatedDate"
-          },
-          {
-            "name": "DW_ModifiedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_ModifiedDate"
           }
         ],
         "partitions": [
@@ -395,6 +364,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
@@ -405,17 +375,20 @@
           {
             "name": "Undistributed Fee Categorisation",
             "dataType": "string",
-            "sourceColumn": "Undistributed Fee Categorisation"
+            "sourceColumn": "Undistributed Fee Categorisation",
+            "sortByColumn": "Fee Categorisation Ranking"
           },
           {
             "name": "Undistributed Fee Country",
             "dataType": "string",
-            "sourceColumn": "Undistributed Fee Country"
+            "sourceColumn": "Undistributed Fee Country",
+            "sortByColumn": "Fee Country Ranking"
           },
           {
             "name": "Undistributed SubSector",
             "dataType": "string",
-            "sourceColumn": "Undistributed SubSector"
+            "sourceColumn": "Undistributed SubSector",
+            "sortByColumn": "SubSector Ranking"
           },
           {
             "name": "Fee Categorisation Ranking",
@@ -431,11 +404,6 @@
             "name": "SubSector Ranking",
             "dataType": "int64",
             "sourceColumn": "SubSector Ranking"
-          },
-          {
-            "name": "DW_ModifiedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_ModifiedDate"
           }
         ],
         "partitions": [
@@ -461,6 +429,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
@@ -670,6 +639,7 @@
           {
             "name": "Id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id"
           },
           {
@@ -681,16 +651,6 @@
             "name": "Licence Type",
             "dataType": "string",
             "sourceColumn": "Licence Type"
-          },
-          {
-            "name": "DW_CreatedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_CreatedDate"
-          },
-          {
-            "name": "DW_ModifiedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_ModifiedDate"
           },
           {
             "type": "calculated",
@@ -729,16 +689,19 @@
           {
             "name": "TransId",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "TransId"
           },
           {
             "name": "Line_ID",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Line_ID"
           },
           {
             "name": "Account",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Account"
           },
           {
@@ -792,6 +755,7 @@
           {
             "name": "Undistributed Account Code",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Undistributed Account Code"
           },
           {
@@ -809,106 +773,91 @@
           {
             "name": "Posting Date",
             "dataType": "dateTime",
-            "sourceColumn": "Posting Date"
+            "sourceColumn": "Posting Date",
+            "displayFolder": "Other"
           },
           {
             "name": "Debit",
             "dataType": "double",
-            "sourceColumn": "Debit"
+            "sourceColumn": "Debit",
+            "displayFolder": "Actual Income"
           },
           {
             "name": "Credit",
             "dataType": "double",
-            "sourceColumn": "Credit"
+            "sourceColumn": "Credit",
+            "displayFolder": "Actual Income"
           },
           {
             "name": "Contract Account",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Contract Account"
           },
           {
             "name": "Description",
             "dataType": "string",
             "sourceColumn": "Description",
-            "displayFolder": "Budget"
+            "displayFolder": "Other"
           },
           {
             "name": "Invoice Number",
             "dataType": "string",
-            "sourceColumn": "Invoice Number"
+            "sourceColumn": "Invoice Number",
+            "displayFolder": "Other"
           },
           {
             "name": "Invoice Reference",
             "dataType": "string",
-            "sourceColumn": "Invoice Reference"
+            "sourceColumn": "Invoice Reference",
+            "displayFolder": "Other"
           },
           {
             "name": "Document Date",
             "dataType": "dateTime",
             "sourceColumn": "Document Date",
-            "displayFolder": "Forecast"
+            "displayFolder": "Other"
           },
           {
             "name": "VAT Group",
             "dataType": "string",
-            "sourceColumn": "VAT Group"
+            "sourceColumn": "VAT Group",
+            "displayFolder": "Other"
           },
           {
             "name": "VAT Amount",
             "dataType": "double",
-            "sourceColumn": "VAT Amount"
+            "sourceColumn": "VAT Amount",
+            "displayFolder": "Other"
           },
           {
             "name": "BaseSum",
             "dataType": "double",
-            "sourceColumn": "BaseSum"
+            "sourceColumn": "BaseSum",
+            "displayFolder": "Other"
           },
           {
             "name": "Income Budget",
-            "dataType": "decimal",
+            "dataType": "double",
             "sourceColumn": "Income Budget",
             "displayFolder": "Budget"
           },
           {
             "name": "Income Daily Budget",
-            "dataType": "decimal",
+            "dataType": "double",
             "sourceColumn": "Income Daily Budget",
             "displayFolder": "Budget"
           },
           {
-            "name": "Income Forecast",
-            "dataType": "decimal",
-            "sourceColumn": "Income Forecast",
-            "displayFolder": "Budget"
-          },
-          {
-            "name": "Income Daily Forecast",
-            "dataType": "decimal",
-            "sourceColumn": "Income Daily Forecast",
-            "displayFolder": "Budget"
-          },
-          {
             "name": "Expenses Budget",
-            "dataType": "decimal",
+            "dataType": "double",
             "sourceColumn": "Expenses Budget",
             "displayFolder": "Budget"
           },
           {
             "name": "Expenses Daily Budget",
-            "dataType": "decimal",
+            "dataType": "double",
             "sourceColumn": "Expenses Daily Budget",
-            "displayFolder": "Budget"
-          },
-          {
-            "name": "Expenses Forecast",
-            "dataType": "decimal",
-            "sourceColumn": "Expenses Forecast",
-            "displayFolder": "Budget"
-          },
-          {
-            "name": "Expenses Daily Forecast",
-            "dataType": "decimal",
-            "sourceColumn": "Expenses Daily Forecast",
             "displayFolder": "Budget"
           },
           {
@@ -969,6 +918,38 @@
             "isDataTypeInferred": true,
             "expression": "[Actual]*'Transactions'[Admin Fee %]",
             "displayFolder": "Admin Fee"
+          },
+          {
+            "name": "Income Reforecast",
+            "dataType": "double",
+            "sourceColumn": "Income Reforecast",
+            "displayFolder": "Reforecast"
+          },
+          {
+            "name": "Income Daily Reforecast",
+            "dataType": "double",
+            "sourceColumn": "Income Daily Reforecast",
+            "displayFolder": "Reforecast"
+          },
+          {
+            "name": "Expenses Reforecast",
+            "dataType": "double",
+            "sourceColumn": "Expenses Reforecast",
+            "displayFolder": "Reforecast"
+          },
+          {
+            "name": "Expenses Daily Reforecast",
+            "dataType": "double",
+            "sourceColumn": "Expenses Daily Reforecast",
+            "displayFolder": "Reforecast"
+          },
+          {
+            "type": "calculated",
+            "name": "Income Daily Forecast",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": "IF(Transactions[Income Daily Reforecast]=0,[Income Daily Budget],Transactions[Income Daily Reforecast])",
+            "displayFolder": "Forecast"
           }
         ],
         "partitions": [
@@ -980,9 +961,9 @@
               "expression": [
                 "let",
                 "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
-                "    fact_vwFinTransaction = Source{[Schema=\"fact\",Item=\"vwFinTransaction\"]}[Data]",
+                "    fact_FinTransaction = Source{[Schema=\"fact\",Item=\"FinTransaction\"]}[Data]",
                 "in",
-                "    fact_vwFinTransaction"
+                "    fact_FinTransaction"
               ]
             }
           }
@@ -1007,54 +988,6 @@
             "name": "Actual CM",
             "expression": [
               " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
-              ""
-            ],
-            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Actual Income",
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "Actual Income (Date Range)",
-            "expression": [
-              " ",
-              "VAR minDate=CALCULATE(Min(Dates[Date]))",
-              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
-              "return ",
-              "CALCULATE(",
-              "[Actual]",
-              ",",
-              "'Transactions'[Posting Date] >= minDate && 'Transactions'[Posting Date] <= maxDate",
-              ") ",
-              ""
-            ],
-            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Actual Income",
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "Actual Income (PY Date Range)",
-            "expression": [
-              " ",
-              "var minDate=CALCULATE(Min(Dates[Date]))",
-              "VAR prevMinDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(minDate), month('dim FinDate'[Date])= month(minDate), 'dim FinDate'[Calendar Year]=year(minDate)-1)",
-              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
-              "",
-              "VAR prevMaxDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(maxDate), month('dim FinDate'[date])= month(maxDate), 'dim FinDate'[Calendar Year]=year(maxDate)-1)",
-              "return ",
-              "CALCULATE(",
-              "[Actual]",
-              ", 'Transactions'[Posting Date]>= prevMinDate && 'Transactions'[Posting Date] <= prevMaxDate",
-              ") ",
               ""
             ],
             "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
@@ -1349,66 +1282,13 @@
             ]
           },
           {
-            "name": "Income Budget(Date Range)",
-            "expression": [
-              " ",
-              "VAR minDate=CALCULATE(Min(Dates[Date]))",
-              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
-              "return ",
-              "CALCULATE(",
-              "Sum('Transactions'[Income Daily Budget])",
-              ", filter (",
-              "all('dim FinDate'[Date])",
-              ", 'dim FinDate'[Date] >= minDate && 'dim FinDate'[Date] <= maxDate",
-              ")",
-              ") ",
-              ""
-            ],
-            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Budget",
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "Income Budget(PY Date Range)",
-            "expression": [
-              " ",
-              "var minDate=CALCULATE(Min(Dates[Date]))",
-              "VAR prevMinDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(minDate), 'dim FinDate'[Month Number]= month(minDate), 'dim FinDate'[Calendar Year]=year(minDate)-1)",
-              "VAR maxDate=CALCULATE(Max(Dates[Date]))",
-              "",
-              "VAR prevMaxDate=CALCULATE(Min('dim FinDate'[Date]), 'dim FinDate'[Day]=day(maxDate), 'dim FinDate'[Month Number]= month(maxDate), 'dim FinDate'[Calendar Year]=year(maxDate)-1)",
-              "return ",
-              "CALCULATE(",
-              "Sum('Transactions'[Income Daily Budget])",
-              ", filter (",
-              "all('dim FinDate'[Date])",
-              ", 'dim FinDate'[Date] >= prevMinDate && 'dim FinDate'[Date] <= prevMaxDate",
-              ")",
-              ") ",
-              ""
-            ],
-            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Budget",
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
-              }
-            ]
-          },
-          {
             "name": "Reforecast",
             "expression": [
-              " sum('Transactions'[Income Daily Forecast])",
+              " sum('Transactions'[Income Daily Reforecast])",
               ""
             ],
             "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Budget",
+            "displayFolder": "Reforecast",
             "annotations": [
               {
                 "name": "Format",
@@ -1423,7 +1303,7 @@
               ""
             ],
             "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Budget",
+            "displayFolder": "Reforecast",
             "annotations": [
               {
                 "name": "Format",
@@ -1438,7 +1318,7 @@
               ""
             ],
             "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Budget",
+            "displayFolder": "Reforecast",
             "annotations": [
               {
                 "name": "Format",
@@ -1453,7 +1333,7 @@
               ""
             ],
             "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Budget",
+            "displayFolder": "Reforecast",
             "annotations": [
               {
                 "name": "Format",
@@ -1468,7 +1348,7 @@
               ""
             ],
             "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Variances",
+            "displayFolder": "Reforecast",
             "annotations": [
               {
                 "name": "Format",
@@ -1483,7 +1363,7 @@
               ""
             ],
             "formatString": "0.00%;-0.00%;0.00%",
-            "displayFolder": "Variances"
+            "displayFolder": "Reforecast"
           },
           {
             "name": "Reforecast v Actual YTD",
@@ -1492,7 +1372,7 @@
               ""
             ],
             "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
-            "displayFolder": "Variances",
+            "displayFolder": "Reforecast",
             "annotations": [
               {
                 "name": "Format",
@@ -1507,23 +1387,7 @@
               ""
             ],
             "formatString": "0.00%;-0.00%;0.00%",
-            "displayFolder": "Variances"
-          },
-          {
-            "name": "Variance (Income vs. Budget)",
-            "expression": [
-              " [Actual Income (Date Range)]-SUM('Transactions'[Income Budget])",
-              ""
-            ],
-            "displayFolder": "Variances"
-          },
-          {
-            "name": "Variance % (Income vs. Budget)",
-            "expression": [
-              " DIVIDE([Variance (Income vs. Budget)],SUM('Transactions'[Income Budget]))",
-              ""
-            ],
-            "displayFolder": "Variances"
+            "displayFolder": "Reforecast"
           },
           {
             "name": "Cumulative Income",
@@ -1539,6 +1403,78 @@
                 "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
               }
             ]
+          },
+          {
+            "name": "Forecast",
+            "expression": " sum('Transactions'[Income Daily Forecast])",
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Forecast",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Forecast CM",
+            "expression": " CALCULATE([Forecast], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Forecast",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Forecast YTD",
+            "expression": " CALCULATE([Forecast], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Forecast",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Forecast v Actual CM",
+            "expression": " [Actual CM] - [Forecast CM]",
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Forecast",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Forecast v Actual YTD % change",
+            "expression": " iF(ABS(DIVIDE([Actual YTD] - [Forecast YTD],[Forecast YTD]))>0.005,DIVIDE([Actual YTD] - [Forecast YTD],[Forecast YTD]))",
+            "formatString": "0.00%;-0.00%;0.00%",
+            "displayFolder": "Forecast"
+          },
+          {
+            "name": "Forecast v Actual YTD",
+            "expression": " [Actual YTD] - [Forecast YTD]",
+            "formatString": "\"£\"#,0.00;-\"£\"#,0.00;\"£\"#,0.00",
+            "displayFolder": "Forecast",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Forecast v Actual CM % change",
+            "expression": " DIVIDE([Actual CM] - [Forecast CM],[Forecast CM])",
+            "formatString": "0.00%;-0.00%;0.00%",
+            "displayFolder": "Forecast"
           }
         ]
       },
@@ -1689,16 +1625,6 @@
             "name": "CreatedDate",
             "dataType": "dateTime",
             "sourceColumn": "CreatedDate"
-          },
-          {
-            "name": "DW_CreatedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_CreatedDate"
-          },
-          {
-            "name": "DW_ModifiedDate",
-            "dataType": "dateTime",
-            "sourceColumn": "DW_ModifiedDate"
           }
         ],
         "partitions": [
@@ -1724,6 +1650,7 @@
           {
             "name": "id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "id"
           },
           {

@@ -33,3 +33,10 @@ C:\SRC\CLA\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\obj\Devel
 C:\SRC\CLA\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\obj\Development\Model.asdatabase
 C:\SRC\CLA\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\obj\Development\Model.deploymentoptions
 C:\SRC\CLA\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\CLA_Finance_BI\obj\Development\Model.deploymenttargets
+C:\SRC\CLA\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Model.asdatabase
+C:\SRC\CLA\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Model.deploymenttargets
+C:\SRC\CLA\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Model.deploymentoptions
+C:\SRC\CLA\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Development\CLA_Finance_BI.smproj.CoreCompileInputs.cache
+C:\SRC\CLA\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Development\Model.asdatabase
+C:\SRC\CLA\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Development\Model.deploymentoptions
+C:\SRC\CLA\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Development\Model.deploymenttargets
