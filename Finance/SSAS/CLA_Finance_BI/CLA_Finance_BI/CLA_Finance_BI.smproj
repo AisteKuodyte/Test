@@ -1,44 +1,44 @@
-﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Development</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8CE414BB-95B2-4C99-9E03-51BA72086E22}</ProjectGuid>
+    <ProjectGuid>{54274f17-634f-4bb4-a098-a51932b98850}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MyRootNamespace</RootNamespace>
-    <AssemblyName>MyAssemblyName</AssemblyName>
+    <RootNamespace>CLA_Finance_BI</RootNamespace>
+    <AssemblyName>CLA_Finance_BI</AssemblyName>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <OutputPath>bin\</OutputPath>
     <Name>CLA_Finance_BI</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Development' ">
     <OutputPath>bin\</OutputPath>
-    <DeploymentServerName>asazure://northeurope.asazure.windows.net/bianalysisservicesdev</DeploymentServerName>
+    <DeploymentServerName>asazure://northeurope.asazure.windows.net/bianalysisservicesdev:rw</DeploymentServerName>
     <DeploymentServerEdition>Developer</DeploymentServerEdition>
-    <DeploymentServerVersion>Unknown</DeploymentServerVersion>
+    <DeploymentServerVersion>Version_13_0</DeploymentServerVersion>
     <DeploymentServerDatabase>CLA_Finance_BI</DeploymentServerDatabase>
     <DeploymentServerCubeName>Finance</DeploymentServerCubeName>
     <DeploymentOptionProcessing>Full</DeploymentOptionProcessing>
     <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>
-    <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
     <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>
     <DeploymentOptionQueryImpersonation>Default</DeploymentOptionQueryImpersonation>
+    <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == '' ">
-    <DeploymentServerName>localhost</DeploymentServerName>
+    <DeploymentServerName>asazure://northeurope.asazure.windows.net/bianalysisservicesdev</DeploymentServerName>
     <DeploymentServerEdition>Developer</DeploymentServerEdition>
     <DeploymentServerVersion>Unknown</DeploymentServerVersion>
     <DeploymentServerDatabase>CLA_Finance_BI</DeploymentServerDatabase>
     <DeploymentServerCubeName>Model</DeploymentServerCubeName>
     <DeploymentOptionProcessing>Default</DeploymentOptionProcessing>
     <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>
-    <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
     <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>
     <DeploymentOptionQueryImpersonation>Default</DeploymentOptionQueryImpersonation>
+    <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
   </PropertyGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Compile Include="Model.bim">
-      <SubType>Code</SubType>
+    <Compile Include="Finance.bim">
+      <SubType>Content</SubType>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Business Intelligence Semantic Model\1.0\Microsoft.AnalysisServices.VSHostBuilder.targets" />
