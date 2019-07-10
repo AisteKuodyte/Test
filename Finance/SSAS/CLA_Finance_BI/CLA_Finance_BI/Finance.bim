@@ -1,5 +1,5 @@
 {
-  "name": "CLA_Finance_BI",
+  "name": "SemanticModel",
   "compatibilityLevel": 1400,
   "model": {
     "name": "Finance",
@@ -47,7 +47,7 @@
             "sourceColumn": "Account Name"
           },
           {
-            "name": "Expense High Level Account",
+            "name": "Expense Type",
             "dataType": "string",
             "sourceColumn": "Expense High Level Account"
           },
@@ -129,6 +129,7 @@
       },
       {
         "name": "Expense Cost Type",
+        "isHidden": true,
         "columns": [
           {
             "name": "Id",
@@ -931,7 +932,7 @@
             "name": "Admin Fee Actual",
             "dataType": "double",
             "isDataTypeInferred": true,
-            "expression": "[Actual]*'Transactions'[Admin Fee %]",
+            "expression": "[Actual Internal]*'Transactions'[Admin Fee %]",
             "displayFolder": "Admin Fee"
           },
           {
@@ -1010,7 +1011,7 @@
         ],
         "measures": [
           {
-            "name": "Actual",
+            "name": "Actual Internal",
             "expression": " sum('Transactions'[Debit]) + sum('Transactions'[Credit])",
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
             "displayFolder": "Actual Income",
@@ -1022,9 +1023,9 @@
             ]
           },
           {
-            "name": "Actual CM",
+            "name": "Actual",
             "expression": [
-              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1039,7 +1040,7 @@
           {
             "name": "Actual Net",
             "expression": [
-              " [Actual CM]-[Admin Fee CM]",
+              " [Actual]-[Admin Fee CM]",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1054,7 +1055,7 @@
           {
             "name": "Actual PY",
             "expression": [
-              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1))",
+              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1069,7 +1070,7 @@
           {
             "name": "Actual PYTD",
             "expression": [
-              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1 && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
+              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1 && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1084,7 +1085,7 @@
           {
             "name": "Actual TD",
             "expression": [
-              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Date] <= [ToDate]))",
+              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Date] <= [ToDate]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1099,7 +1100,7 @@
           {
             "name": "Actual YTD",
             "expression": [
-              " CALCULATE([Actual], FILTER(ALL('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Date] <= [ToDate]))",
+              " CALCULATE([Actual Internal], FILTER(ALL('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Date] <= [ToDate]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1156,7 +1157,7 @@
           {
             "name": "Income PY",
             "expression": [
-              " CALCULATE([Actual],DATEADD('dim FinDate'[Date],-1,YEAR))",
+              " CALCULATE([Actual Internal],DATEADD('dim FinDate'[Date],-1,YEAR))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1171,7 +1172,7 @@
           {
             "name": "Net (CM)",
             "expression": [
-              " [Actual CM] - [Admin Fee CM]",
+              " [Actual] - [Admin Fee CM]",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1381,7 +1382,7 @@
           {
             "name": "Reforecast v Actual CM",
             "expression": [
-              " [Actual CM] - [Reforecast CM]",
+              " [Actual] - [Reforecast CM]",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1396,7 +1397,7 @@
           {
             "name": "Reforecast v Actual CM % change",
             "expression": [
-              " DIVIDE([Actual CM] - [Reforecast CM],[Reforecast CM])",
+              " DIVIDE([Actual] - [Reforecast CM],[Reforecast CM])",
               ""
             ],
             "formatString": "0.00%;-0.00%;0.00%",
@@ -1430,7 +1431,7 @@
             "name": "Cumulative Income",
             "expression": [
               " ",
-              "CALCULATE([Actual],filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <=MAX('dim FinDate'[Date])))"
+              "CALCULATE([Actual Internal],filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <=MAX('dim FinDate'[Date])))"
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
             "displayFolder": "Actual Income",
@@ -1479,7 +1480,7 @@
           },
           {
             "name": "Forecast v Actual CM",
-            "expression": " [Actual CM] - [Forecast CM]",
+            "expression": " [Actual] - [Forecast CM]",
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
             "displayFolder": "Forecast",
             "annotations": [
@@ -1509,7 +1510,7 @@
           },
           {
             "name": "Forecast v Actual CM % change",
-            "expression": " DIVIDE([Actual CM] - [Forecast CM],[Forecast CM])",
+            "expression": " DIVIDE([Actual] - [Forecast CM],[Forecast CM])",
             "formatString": "0.00%;-0.00%;0.00%",
             "displayFolder": "Forecast"
           },
@@ -1599,7 +1600,7 @@
         ]
       },
       {
-        "name": "fact FinFixedAsset",
+        "name": "Fixed Asset",
         "columns": [
           {
             "name": "Id",
@@ -1695,7 +1696,7 @@
         ]
       },
       {
-        "name": "dim vwFinExpenditureIncomeReportMapping",
+        "name": "CLA Income And Expenditure Mapping",
         "columns": [
           {
             "name": "id",
@@ -1747,13 +1748,8 @@
         ]
       },
       {
-        "name": "fact vwExpenses",
+        "name": "Expenses",
         "columns": [
-          {
-            "name": "Id",
-            "dataType": "int64",
-            "sourceColumn": "Id"
-          },
           {
             "name": "TransId",
             "dataType": "int64",
@@ -1767,56 +1763,19 @@
           {
             "name": "Account",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Account"
-          },
-          {
-            "name": "Fee Category",
-            "dataType": "int64",
-            "sourceColumn": "Fee Category"
-          },
-          {
-            "name": "Licence Type",
-            "dataType": "int64",
-            "sourceColumn": "Licence Type"
-          },
-          {
-            "name": "Title Type",
-            "dataType": "int64",
-            "sourceColumn": "Title Type"
           },
           {
             "name": "Department",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Department"
-          },
-          {
-            "name": "Income Sector",
-            "dataType": "int64",
-            "sourceColumn": "Income Sector"
-          },
-          {
-            "name": "Income Type",
-            "dataType": "int64",
-            "sourceColumn": "Income Type"
-          },
-          {
-            "name": "Country",
-            "dataType": "int64",
-            "sourceColumn": "Country"
-          },
-          {
-            "name": "Distribution Sector",
-            "dataType": "int64",
-            "sourceColumn": "Distribution Sector"
-          },
-          {
-            "name": "Undistributed Account Code",
-            "dataType": "int64",
-            "sourceColumn": "Undistributed Account Code"
           },
           {
             "name": "Expense Cost Type",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Expense Cost Type"
           },
           {
@@ -1880,26 +1839,6 @@
             "sourceColumn": "BaseSum"
           },
           {
-            "name": "Income Budget",
-            "dataType": "double",
-            "sourceColumn": "Income Budget"
-          },
-          {
-            "name": "Income Daily Budget",
-            "dataType": "double",
-            "sourceColumn": "Income Daily Budget"
-          },
-          {
-            "name": "Income Reforecast",
-            "dataType": "double",
-            "sourceColumn": "Income Reforecast"
-          },
-          {
-            "name": "Income Daily Reforecast",
-            "dataType": "double",
-            "sourceColumn": "Income Daily Reforecast"
-          },
-          {
             "name": "Expenses Budget",
             "dataType": "double",
             "sourceColumn": "Expenses Budget"
@@ -1920,14 +1859,15 @@
             "sourceColumn": "Expenses Daily Reforecast"
           },
           {
-            "name": "RecordType",
-            "dataType": "string",
-            "sourceColumn": "RecordType"
-          },
-          {
             "name": "Is Salary Account",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "Is Salary Account"
+          },
+          {
+            "name": "Department Code",
+            "dataType": "string",
+            "sourceColumn": "department code"
           }
         ],
         "partitions": [
@@ -1945,10 +1885,77 @@
               ]
             }
           }
+        ],
+        "measures": [
+          {
+            "name": "Expenses",
+            "expression": " SUM(Expenses[Credit]) + SUM(Expenses[Debit])",
+            "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Expenses CM",
+            "expression": " CALCULATE([Expenses], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))"
+          },
+          {
+            "name": "Expenses PY",
+            "expression": " CALCULATE([Expenses], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1))"
+          },
+          {
+            "name": "Expenses TD",
+            "expression": " CALCULATE(Expenses[Expenses], FILTER(all('dim FinDate'), 'dim FinDate'[Date] <= [ToDate]))"
+          },
+          {
+            "name": "Expenses YTD",
+            "expression": " CALCULATE(Expenses[Expenses], FILTER(ALL('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Date] <= [ToDate]))"
+          },
+          {
+            "name": "Expenses Budget CM",
+            "expression": " CALCULATE(SUM(Expenses[Expenses Daily Budget]), FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+            "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Expenses Budget Full Year",
+            "expression": " CALCULATE(sum(Expenses[Expenses Daily Budget]), FILTER(all('dim FinDate'), 'dim FinDate'[Year]=[Current Year]))",
+            "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Expenses Reforecast CM",
+            "expression": " CALCULATE([Exp Reforecast], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))"
+          },
+          {
+            "name": "Exp Reforecast",
+            "expression": " sum( [Expenses Daily Reforecast])",
+            "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          }
         ]
       },
       {
         "name": "fact vwSalaryExpenses",
+        "isHidden": true,
         "columns": [
           {
             "name": "Id",
@@ -2149,16 +2156,18 @@
         ]
       },
       {
-        "name": "fact vwSalaryExpensesTotals",
+        "name": "Salary Expense Totals",
         "columns": [
           {
             "name": "Account",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Account"
           },
           {
             "name": "Expense Cost Type",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Expense Cost Type"
           },
           {
@@ -2199,7 +2208,13 @@
           {
             "name": "Department",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Department"
+          },
+          {
+            "name": "Department Code",
+            "dataType": "string",
+            "sourceColumn": "Department Code"
           }
         ],
         "partitions": [
@@ -2217,10 +2232,45 @@
               ]
             }
           }
+        ],
+        "measures": [
+          {
+            "name": "Salary",
+            "expression": " Sum('Salary Expense Totals'[Credit]) + SUm('Salary Expense Totals'[Debit])",
+            "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Salary CM",
+            "expression": " CALCULATE([Salary], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+            "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Salary YTD",
+            "expression": " CALCULATE('Salary Expense Totals'[Salary], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
+            "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"2057\" DisplayName=\"£ English (United Kingdom)\" Symbol=\"£\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          }
         ]
       },
       {
-        "name": "fin UserDepartmentMapping",
+        "name": "UserDepartment",
         "columns": [
           {
             "name": "ID",
@@ -2254,162 +2304,245 @@
             }
           }
         ]
+      },
+      {
+        "name": "ExpenseAccount",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Account Code",
+            "dataType": "string",
+            "sourceColumn": "Account Code"
+          },
+          {
+            "name": "Account Name",
+            "dataType": "string",
+            "sourceColumn": "Account Name"
+          },
+          {
+            "name": "Expense High Level Account",
+            "dataType": "string",
+            "sourceColumn": "Expense High Level Account"
+          },
+          {
+            "name": "TB_Mapping",
+            "dataType": "string",
+            "sourceColumn": "TB_Mapping"
+          },
+          {
+            "name": "Expense Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Expense Ranking"
+          },
+          {
+            "name": "TB Ranking",
+            "dataType": "int64",
+            "sourceColumn": "TB Ranking"
+          },
+          {
+            "name": "Is Salary Account",
+            "dataType": "boolean",
+            "sourceColumn": "Is Salary Account"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinAccount = Source{[Schema=\"dim\",Item=\"FinAccount\"]}[Data]",
+                "in",
+                "    dim_FinAccount"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
       {
         "name": "5aa23bab-aae8-455a-a191-459543fc57e0",
-        "toTable": "Department",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Department"
+        "fromColumn": "Department",
+        "toTable": "Department",
+        "toColumn": "Id"
       },
       {
         "name": "3952f7d2-3ca9-4c78-9e41-9ae2b1d0b1d8",
-        "toTable": "License Fee Country",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Country"
+        "fromColumn": "Country",
+        "toTable": "License Fee Country",
+        "toColumn": "Id"
       },
       {
         "name": "4f6a1c28-93be-460e-81e9-71b32c5544ee",
-        "toTable": "Title Type",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Title Type"
+        "fromColumn": "Title Type",
+        "toTable": "Title Type",
+        "toColumn": "Id"
       },
       {
         "name": "ad151b0f-aaf2-4cc1-ae3e-761dad49be42",
-        "toTable": "Licence Type",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Licence Type"
+        "fromColumn": "Licence Type",
+        "toTable": "Licence Type",
+        "toColumn": "Id"
       },
       {
         "name": "b5811f49-062a-4782-bff3-9368387daa2a",
-        "toTable": "Account",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Account"
+        "fromColumn": "Account",
+        "toTable": "Account",
+        "toColumn": "Id"
       },
       {
         "name": "ee01c56f-6bb2-42d2-b2e9-cd949cf36827",
-        "toTable": "dim FinDate",
-        "toColumn": "Date",
         "fromTable": "Transactions",
-        "fromColumn": "Posting Date"
+        "fromColumn": "Posting Date",
+        "toTable": "dim FinDate",
+        "toColumn": "Date"
       },
       {
         "name": "87d626dc-b416-4efa-8f8e-f824f9b7cab9",
-        "toTable": "Fee Category",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Fee Category"
+        "fromColumn": "Fee Category",
+        "toTable": "Fee Category",
+        "toColumn": "Id"
       },
       {
         "name": "f7c89a6e-7402-45c8-a4ce-f992315ba05e",
-        "toTable": "Distribution Sector",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Distribution Sector"
+        "fromColumn": "Distribution Sector",
+        "toTable": "Distribution Sector",
+        "toColumn": "Id"
       },
       {
         "name": "55c65793-e669-40e1-a50e-4a2134b975f9",
-        "toTable": "Undistributed Funds",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Undistributed Account Code"
+        "fromColumn": "Undistributed Account Code",
+        "toTable": "Undistributed Funds",
+        "toColumn": "Id"
       },
       {
         "name": "c8710002-5c62-4921-927e-392f68a402c4",
-        "toTable": "Income Type",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Income Type"
+        "fromColumn": "Income Type",
+        "toTable": "Income Type",
+        "toColumn": "Id"
       },
       {
         "name": "556c9acf-f3c3-47d0-850f-3d0100005e67",
-        "toTable": "Income Sector",
-        "toColumn": "Id",
         "fromTable": "Transactions",
-        "fromColumn": "Income Sector"
+        "fromColumn": "Income Sector",
+        "toTable": "Income Sector",
+        "toColumn": "Id"
       },
       {
         "name": "2d201d94-f640-4e84-9a31-2414a06be18b",
-        "toTable": "dim vwFinExpenditureIncomeReportMapping",
-        "toColumn": "id",
         "fromTable": "Transactions",
-        "fromColumn": "Account"
-      },
-      {
-        "name": "e54f3268-ed0d-4d62-893d-df8ef098ae66",
-        "toTable": "Account",
-        "toColumn": "Id",
-        "fromTable": "fact vwExpenses",
-        "fromColumn": "Account"
+        "fromColumn": "Account",
+        "toTable": "CLA Income And Expenditure Mapping",
+        "toColumn": "id"
       },
       {
         "name": "b0b9ff05-e378-439b-a7c1-4efc78bb9190",
+        "fromTable": "Expenses",
+        "fromColumn": "Posting Date",
         "toTable": "Dates",
-        "toColumn": "Date",
-        "fromTable": "fact vwExpenses",
-        "fromColumn": "Posting Date"
+        "toColumn": "Date"
       },
       {
         "name": "3eebfa8b-a369-4694-842d-cd3a9a6ae339",
-        "toTable": "Dates",
-        "toColumn": "Date",
         "fromTable": "fact vwSalaryExpenses",
-        "fromColumn": "Posting Date"
+        "fromColumn": "Posting Date",
+        "toTable": "Dates",
+        "toColumn": "Date"
       },
       {
         "name": "4ed4d46e-b0d5-4e8f-9952-53186ffa4581",
-        "toTable": "Account",
-        "toColumn": "Id",
         "fromTable": "fact vwSalaryExpenses",
-        "fromColumn": "Account"
+        "fromColumn": "Account",
+        "toTable": "Account",
+        "toColumn": "Id"
       },
       {
         "name": "715dc4c7-5a26-40e7-aa7a-e36556d900e5",
+        "fromTable": "Salary Expense Totals",
+        "fromColumn": "Account",
         "toTable": "Account",
-        "toColumn": "Id",
-        "fromTable": "fact vwSalaryExpensesTotals",
-        "fromColumn": "Account"
+        "toColumn": "Id"
       },
       {
         "name": "3cbd2d42-d431-4ca3-87be-997b9e1fca99",
+        "fromTable": "Salary Expense Totals",
+        "fromColumn": "Expense Cost Type",
         "toTable": "Expense Cost Type",
-        "toColumn": "Id",
-        "fromTable": "fact vwSalaryExpensesTotals",
-        "fromColumn": "Expense Cost Type"
+        "toColumn": "Id"
       },
       {
         "name": "48792d67-aa48-41e6-83a5-209b4abd5990",
+        "fromTable": "Salary Expense Totals",
+        "fromColumn": "Posting Date",
         "toTable": "Dates",
-        "toColumn": "Date",
-        "fromTable": "fact vwSalaryExpensesTotals",
-        "fromColumn": "Posting Date"
+        "toColumn": "Date"
       },
       {
         "name": "94c95c3d-25eb-4d0d-aa58-d48d5ccaa5eb",
+        "fromTable": "Expenses",
+        "fromColumn": "Expense Cost Type",
         "toTable": "Expense Cost Type",
-        "toColumn": "Id",
-        "fromTable": "fact vwExpenses",
-        "fromColumn": "Expense Cost Type"
+        "toColumn": "Id"
       },
       {
         "name": "95eada78-db26-4207-a890-9c9b590e2490",
+        "fromTable": "UserDepartment",
+        "fromColumn": "Department Code",
         "toTable": "Department",
-        "toColumn": "Department Code",
-        "fromTable": "fin UserDepartmentMapping",
-        "fromColumn": "Department Code"
+        "toColumn": "Department Code"
       },
       {
         "name": "1b2c2026-845a-49a1-8988-f29e0cd88948",
+        "fromTable": "Salary Expense Totals",
+        "fromColumn": "Department",
         "toTable": "Department",
-        "toColumn": "Id",
-        "fromTable": "fact vwSalaryExpensesTotals",
-        "fromColumn": "Department"
+        "toColumn": "Id"
+      },
+      {
+        "name": "e54f3268-ed0d-4d62-893d-df8ef098ae66",
+        "fromTable": "Expenses",
+        "fromColumn": "Account",
+        "toTable": "Account",
+        "toColumn": "Id"
+      },
+      {
+        "name": "0ae29bf3-3ac0-40e9-9a79-42291eef1dbe",
+        "fromTable": "Expenses",
+        "fromColumn": "Account",
+        "toTable": "ExpenseAccount",
+        "toColumn": "Id"
+      },
+      {
+        "name": "a432ba79-5f73-4fdc-8bf7-a1db6faff5a0",
+        "fromTable": "Expenses",
+        "fromColumn": "Department",
+        "toTable": "Department",
+        "toColumn": "Id"
+      },
+      {
+        "name": "eadae367-00f2-4a19-b746-3152cbe5402c",
+        "fromTable": "Salary Expense Totals",
+        "fromColumn": "Posting Date",
+        "toTable": "dim FinDate",
+        "toColumn": "Date"
       }
     ],
     "roles": [
@@ -2419,10 +2552,12 @@
         "members": [
           {
             "memberName": "vamsi.bora@cla.co.uk",
+            "memberId": "vamsi.bora@cla.co.uk#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Aiste.Kuodyte@cla.co.uk",
+            "memberId": "Aiste.Kuodyte@cla.co.uk#AzureAD",
             "identityProvider": "AzureAD"
           }
         ]
@@ -2433,6 +2568,7 @@
         "members": [
           {
             "memberName": "testbiuser4@cla.co.uk",
+            "memberId": "testbiuser4@cla.co.uk#AzureAD",
             "identityProvider": "AzureAD"
           }
         ],
@@ -2610,17 +2746,190 @@
         "members": [
           {
             "memberName": "testbiuser1@cla.co.uk",
+            "memberId": "testbiuser1@cla.co.uk",
             "identityProvider": "AzureAD"
           }
-        ]
-      },
-      {
-        "name": "SLT",
-        "modelPermission": "read",
-        "members": [
+        ],
+        "tablePermissions": [
           {
-            "memberName": "testbiuser5@cla.co.uk",
-            "identityProvider": "AzureAD"
+            "name": "Expenses",
+            "filterExpression": [
+              "Expenses[Department Code] IN SELECTCOLUMNS(",
+              "\tFILTER(",
+              "\t\t'UserDepartment',",
+              "\t\tUserDepartment[UserName]=USERNAME()",
+              "\t),",
+              "\t\"Department Code\",",
+              "\t[Department Code]",
+              ")"
+            ]
+          },
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": [
+              "'Salary Expense Totals'[Department Code] IN SELECTCOLUMNS(",
+              "\tFILTER(",
+              "\t\t'UserDepartment',",
+              "\t\tUserDepartment[UserName]=USERNAME()",
+              "\t),",
+              "\t\"Department Code\",",
+              "\t[Department Code]",
+              ")"
+            ]
+          },
+          {
+            "name": "UserDepartment",
+            "columnPermissions": [
+              {
+                "name": "ID",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "UserName",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Department Code",
+                "metadataPermission": "none"
+              }
+            ]
+          },
+          {
+            "name": "Transactions",
+            "columnPermissions": [
+              {
+                "name": "Id"
+              },
+              {
+                "name": "TransId"
+              },
+              {
+                "name": "Line_ID"
+              },
+              {
+                "name": "Account"
+              },
+              {
+                "name": "Fee Category"
+              },
+              {
+                "name": "Licence Type"
+              },
+              {
+                "name": "Title Type"
+              },
+              {
+                "name": "Department"
+              },
+              {
+                "name": "Income Sector"
+              },
+              {
+                "name": "Income Type"
+              },
+              {
+                "name": "Country"
+              },
+              {
+                "name": "Distribution Sector"
+              },
+              {
+                "name": "Undistributed Account Code"
+              },
+              {
+                "name": "Expense Cost Type"
+              },
+              {
+                "name": "AdminFeePercent"
+              },
+              {
+                "name": "Posting Date"
+              },
+              {
+                "name": "Debit"
+              },
+              {
+                "name": "Credit"
+              },
+              {
+                "name": "Contract Account"
+              },
+              {
+                "name": "Description"
+              },
+              {
+                "name": "Invoice Number"
+              },
+              {
+                "name": "Invoice Reference"
+              },
+              {
+                "name": "Document Date"
+              },
+              {
+                "name": "VAT Group"
+              },
+              {
+                "name": "VAT Amount"
+              },
+              {
+                "name": "BaseSum"
+              },
+              {
+                "name": "Income Budget"
+              },
+              {
+                "name": "Income Daily Budget"
+              },
+              {
+                "name": "Expenses Budget"
+              },
+              {
+                "name": "Expenses Daily Budget"
+              },
+              {
+                "name": "RecordType"
+              },
+              {
+                "name": "Admin Fee %"
+              },
+              {
+                "name": "Admin Fee Actual"
+              },
+              {
+                "name": "Income Reforecast"
+              },
+              {
+                "name": "Income Daily Reforecast"
+              },
+              {
+                "name": "Expenses Reforecast"
+              },
+              {
+                "name": "Expenses Daily Reforecast"
+              },
+              {
+                "name": "Income Daily Forecast"
+              },
+              {
+                "name": "DW_CreatedDate"
+              },
+              {
+                "name": "DW_ModifiedDate"
+              },
+              {
+                "name": "Expense High Level Account"
+              },
+              {
+                "name": "Is Salary Account"
+              },
+              {
+                "name": "Department Code"
+              }
+            ]
+          },
+          {
+            "name": "Fixed Asset"
           }
         ]
       },
@@ -2630,7 +2939,30 @@
         "members": [
           {
             "memberName": "testbiuser2@cla.co.uk",
+            "memberId": "testbiuser2@cla.co.uk",
             "identityProvider": "AzureAD"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "fact vwSalaryExpenses",
+            "metadataPermission": "none"
+          },
+          {
+            "name": "Salary Expense Totals",
+            "metadataPermission": "none"
+          },
+          {
+            "name": "Expenses",
+            "metadataPermission": "none"
+          },
+          {
+            "name": "Fixed Asset",
+            "metadataPermission": "none"
+          },
+          {
+            "name": "UserDepartment",
+            "metadataPermission": "none"
           }
         ]
       },
@@ -2640,7 +2972,40 @@
         "members": [
           {
             "memberName": "testbiuser3@cla.co.uk",
+            "memberId": "testbiuser3@cla.co.uk",
             "identityProvider": "AzureAD"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "Expenses",
+            "filterExpression": [
+              "Expenses[Department Code] IN SELECTCOLUMNS(",
+              "\tFILTER(",
+              "\t\t'UserDepartment',",
+              "\t\tUserDepartment[UserName]=USERNAME()",
+              "\t),",
+              "\t\"Department Code\",",
+              "\t[Department Code]",
+              ")"
+            ]
+          },
+          {
+            "name": "ExpenseAccount",
+            "filterExpression": " ExpenseAccount[Is Salary Account]=FALSE"
+          },
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": [
+              "'Salary Expense Totals'[Department Code] IN SELECTCOLUMNS(",
+              "\tFILTER(",
+              "\t\t'UserDepartment',",
+              "\t\tUserDepartment[UserName]=USERNAME()",
+              "\t),",
+              "\t\"Department Code\",",
+              "\t[Department Code]",
+              ")"
+            ]
           }
         ]
       }
@@ -2651,5 +3016,6 @@
         "value": "500"
       }
     ]
-  }
+  },
+  "id": "SemanticModel"
 }
