@@ -13,12 +13,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Development' ">
     <OutputPath>bin\</OutputPath>
-    <DeploymentServerName>asazure://northeurope.asazure.windows.net/bianalysisservicesdev:rw</DeploymentServerName>
+    <DeploymentServerName>asazure://northeurope.asazure.windows.net/bianalysisservicesdev</DeploymentServerName>
     <DeploymentServerEdition>Developer</DeploymentServerEdition>
     <DeploymentServerVersion>Version_13_0</DeploymentServerVersion>
-    <DeploymentServerDatabase>CLA_Finance_BI</DeploymentServerDatabase>
+    <DeploymentServerDatabase>CLA_Finance_BI_Test</DeploymentServerDatabase>
     <DeploymentServerCubeName>Finance</DeploymentServerCubeName>
-    <DeploymentOptionProcessing>Default</DeploymentOptionProcessing>
+    <DeploymentOptionProcessing>Full</DeploymentOptionProcessing>
     <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>
     <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>
     <DeploymentOptionQueryImpersonation>Default</DeploymentOptionQueryImpersonation>
@@ -35,6 +35,19 @@
     <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>
     <DeploymentOptionQueryImpersonation>Default</DeploymentOptionQueryImpersonation>
     <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Production' ">
+    <DeploymentServerName>asazure://uksouth.asazure.windows.net/bianalysisservicesprd</DeploymentServerName>
+    <DeploymentServerEdition>Developer</DeploymentServerEdition>
+    <DeploymentServerVersion>Version_13_0</DeploymentServerVersion>
+    <DeploymentServerDatabase>CLA_Finance_BI</DeploymentServerDatabase>
+    <DeploymentServerCubeName>Finance</DeploymentServerCubeName>
+    <DeploymentOptionProcessing>Full</DeploymentOptionProcessing>
+    <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>
+    <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>
+    <DeploymentOptionQueryImpersonation>Default</DeploymentOptionQueryImpersonation>
+    <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
+    <OutputPath>bin\Production\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Finance.bim">

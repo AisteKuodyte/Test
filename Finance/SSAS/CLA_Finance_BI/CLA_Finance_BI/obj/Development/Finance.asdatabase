@@ -11,17 +11,15 @@
         "connectionDetails": {
           "protocol": "tds",
           "address": {
-            "server": "azdbsvr02-preprd-dev-dxdw.database.windows.net",
-            "database": "datawarehouse_dev"
+            "server": "cla-bi-prd.database.windows.net",
+            "database": "bi_prd"
           },
           "authentication": null,
           "query": null
         },
         "credential": {
           "AuthenticationKind": "UsernamePassword",
-          "kind": "SQL",
-          "path": "azdbsvr02-preprd-dev-dxdw.database.windows.net;datawarehouse_dev",
-          "Username": "cla_etl",
+          "Username": "clabisqlprdetl ",
           "EncryptConnection": true
         }
       }
@@ -932,7 +930,7 @@
             "name": "Admin Fee Actual",
             "dataType": "double",
             "isDataTypeInferred": true,
-            "expression": "[Actual Internal]*'Transactions'[Admin Fee %]",
+            "expression": "[Actual]*'Transactions'[Admin Fee %]",
             "displayFolder": "Admin Fee"
           },
           {
@@ -1011,7 +1009,7 @@
         ],
         "measures": [
           {
-            "name": "Actual Internal",
+            "name": "Actual",
             "expression": " sum('Transactions'[Debit]) + sum('Transactions'[Credit])",
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
             "displayFolder": "Actual Income",
@@ -1023,9 +1021,9 @@
             ]
           },
           {
-            "name": "Actual",
+            "name": "Actual CM",
             "expression": [
-              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Month Number] = [CurrentMonthNumber]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1040,7 +1038,7 @@
           {
             "name": "Actual Net",
             "expression": [
-              " [Actual]-[Admin Fee CM]",
+              " [Actual CM]-[Admin Fee CM]",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1055,7 +1053,7 @@
           {
             "name": "Actual PY",
             "expression": [
-              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1))",
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1070,7 +1068,7 @@
           {
             "name": "Actual PYTD",
             "expression": [
-              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1 && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Year] = [Current Year]-1 && 'dim FinDate'[Month Number] <= [CurrentMonthNumber]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1085,7 +1083,7 @@
           {
             "name": "Actual TD",
             "expression": [
-              " CALCULATE([Actual Internal], FILTER(all('dim FinDate'), 'dim FinDate'[Date] <= [ToDate]))",
+              " CALCULATE([Actual], FILTER(all('dim FinDate'), 'dim FinDate'[Date] <= [ToDate]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1100,7 +1098,7 @@
           {
             "name": "Actual YTD",
             "expression": [
-              " CALCULATE([Actual Internal], FILTER(ALL('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Date] <= [ToDate]))",
+              " CALCULATE([Actual], FILTER(ALL('dim FinDate'), 'dim FinDate'[Year] = [Current Year] && 'dim FinDate'[Date] <= [ToDate]))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1157,7 +1155,7 @@
           {
             "name": "Income PY",
             "expression": [
-              " CALCULATE([Actual Internal],DATEADD('dim FinDate'[Date],-1,YEAR))",
+              " CALCULATE([Actual],DATEADD('dim FinDate'[Date],-1,YEAR))",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1172,7 +1170,7 @@
           {
             "name": "Net (CM)",
             "expression": [
-              " [Actual] - [Admin Fee CM]",
+              " [Actual CM] - [Admin Fee CM]",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1382,7 +1380,7 @@
           {
             "name": "Reforecast v Actual CM",
             "expression": [
-              " [Actual] - [Reforecast CM]",
+              " [Actual CM] - [Reforecast CM]",
               ""
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
@@ -1397,7 +1395,7 @@
           {
             "name": "Reforecast v Actual CM % change",
             "expression": [
-              " DIVIDE([Actual] - [Reforecast CM],[Reforecast CM])",
+              " DIVIDE([Actual CM] - [Reforecast CM],[Reforecast CM])",
               ""
             ],
             "formatString": "0.00%;-0.00%;0.00%",
@@ -1431,7 +1429,7 @@
             "name": "Cumulative Income",
             "expression": [
               " ",
-              "CALCULATE([Actual Internal],filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <=MAX('dim FinDate'[Date])))"
+              "CALCULATE([Actual],filter(ALLSELECTED( 'dim FinDate'),'dim FinDate'[Date] <=MAX('dim FinDate'[Date])))"
             ],
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
             "displayFolder": "Actual Income",
@@ -1480,7 +1478,7 @@
           },
           {
             "name": "Forecast v Actual CM",
-            "expression": " [Actual] - [Forecast CM]",
+            "expression": " [Actual CM] - [Forecast CM]",
             "formatString": "\"£\"#,0;-\"£\"#,0;\"£\"#,0",
             "displayFolder": "Forecast",
             "annotations": [
@@ -1510,7 +1508,7 @@
           },
           {
             "name": "Forecast v Actual CM % change",
-            "expression": " DIVIDE([Actual] - [Forecast CM],[Forecast CM])",
+            "expression": " DIVIDE([Actual CM] - [Forecast CM],[Forecast CM])",
             "formatString": "0.00%;-0.00%;0.00%",
             "displayFolder": "Forecast"
           },
@@ -1954,208 +1952,6 @@
         ]
       },
       {
-        "name": "fact vwSalaryExpenses",
-        "isHidden": true,
-        "columns": [
-          {
-            "name": "Id",
-            "dataType": "int64",
-            "sourceColumn": "Id"
-          },
-          {
-            "name": "TransId",
-            "dataType": "int64",
-            "sourceColumn": "TransId"
-          },
-          {
-            "name": "Line_ID",
-            "dataType": "int64",
-            "sourceColumn": "Line_ID"
-          },
-          {
-            "name": "Account",
-            "dataType": "int64",
-            "sourceColumn": "Account"
-          },
-          {
-            "name": "Fee Category",
-            "dataType": "int64",
-            "sourceColumn": "Fee Category"
-          },
-          {
-            "name": "Licence Type",
-            "dataType": "int64",
-            "sourceColumn": "Licence Type"
-          },
-          {
-            "name": "Title Type",
-            "dataType": "int64",
-            "sourceColumn": "Title Type"
-          },
-          {
-            "name": "Department",
-            "dataType": "int64",
-            "sourceColumn": "Department"
-          },
-          {
-            "name": "Income Sector",
-            "dataType": "int64",
-            "sourceColumn": "Income Sector"
-          },
-          {
-            "name": "Income Type",
-            "dataType": "int64",
-            "sourceColumn": "Income Type"
-          },
-          {
-            "name": "Country",
-            "dataType": "int64",
-            "sourceColumn": "Country"
-          },
-          {
-            "name": "Distribution Sector",
-            "dataType": "int64",
-            "sourceColumn": "Distribution Sector"
-          },
-          {
-            "name": "Undistributed Account Code",
-            "dataType": "int64",
-            "sourceColumn": "Undistributed Account Code"
-          },
-          {
-            "name": "Expense Cost Type",
-            "dataType": "int64",
-            "sourceColumn": "Expense Cost Type"
-          },
-          {
-            "name": "AdminFeePercent",
-            "dataType": "double",
-            "sourceColumn": "AdminFeePercent"
-          },
-          {
-            "name": "Posting Date",
-            "dataType": "dateTime",
-            "sourceColumn": "Posting Date"
-          },
-          {
-            "name": "Debit",
-            "dataType": "double",
-            "sourceColumn": "Debit"
-          },
-          {
-            "name": "Credit",
-            "dataType": "double",
-            "sourceColumn": "Credit"
-          },
-          {
-            "name": "Contract Account",
-            "dataType": "string",
-            "sourceColumn": "Contract Account"
-          },
-          {
-            "name": "Description",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "Invoice Number",
-            "dataType": "string",
-            "sourceColumn": "Invoice Number"
-          },
-          {
-            "name": "Invoice Reference",
-            "dataType": "string",
-            "sourceColumn": "Invoice Reference"
-          },
-          {
-            "name": "Document Date",
-            "dataType": "dateTime",
-            "sourceColumn": "Document Date"
-          },
-          {
-            "name": "VAT Group",
-            "dataType": "string",
-            "sourceColumn": "VAT Group"
-          },
-          {
-            "name": "VAT Amount",
-            "dataType": "double",
-            "sourceColumn": "VAT Amount"
-          },
-          {
-            "name": "BaseSum",
-            "dataType": "double",
-            "sourceColumn": "BaseSum"
-          },
-          {
-            "name": "Income Budget",
-            "dataType": "double",
-            "sourceColumn": "Income Budget"
-          },
-          {
-            "name": "Income Daily Budget",
-            "dataType": "double",
-            "sourceColumn": "Income Daily Budget"
-          },
-          {
-            "name": "Income Reforecast",
-            "dataType": "double",
-            "sourceColumn": "Income Reforecast"
-          },
-          {
-            "name": "Income Daily Reforecast",
-            "dataType": "double",
-            "sourceColumn": "Income Daily Reforecast"
-          },
-          {
-            "name": "Expenses Budget",
-            "dataType": "double",
-            "sourceColumn": "Expenses Budget"
-          },
-          {
-            "name": "Expenses Daily Budget",
-            "dataType": "double",
-            "sourceColumn": "Expenses Daily Budget"
-          },
-          {
-            "name": "Expenses Reforecast",
-            "dataType": "double",
-            "sourceColumn": "Expenses Reforecast"
-          },
-          {
-            "name": "Expenses Daily Reforecast",
-            "dataType": "double",
-            "sourceColumn": "Expenses Daily Reforecast"
-          },
-          {
-            "name": "RecordType",
-            "dataType": "string",
-            "sourceColumn": "RecordType"
-          },
-          {
-            "name": "Is Salary Account",
-            "dataType": "boolean",
-            "sourceColumn": "Is Salary Account"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
-                "    fact_vwSalaryExpenses = Source{[Schema=\"fact\",Item=\"vwSalaryExpenses\"]}[Data]",
-                "in",
-                "    fact_vwSalaryExpenses"
-              ]
-            }
-          }
-        ]
-      },
-      {
         "name": "Salary Expense Totals",
         "columns": [
           {
@@ -2270,42 +2066,6 @@
         ]
       },
       {
-        "name": "UserDepartment",
-        "columns": [
-          {
-            "name": "ID",
-            "dataType": "int64",
-            "sourceColumn": "ID"
-          },
-          {
-            "name": "UserName",
-            "dataType": "string",
-            "sourceColumn": "UserName"
-          },
-          {
-            "name": "Department Code",
-            "dataType": "string",
-            "sourceColumn": "Department Code"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
-                "    fin_UserDepartmentMapping = Source{[Schema=\"fin\",Item=\"UserDepartmentMapping\"]}[Data]",
-                "in",
-                "    fin_UserDepartmentMapping"
-              ]
-            }
-          }
-        ]
-      },
-      {
         "name": "ExpenseAccount",
         "isHidden": true,
         "columns": [
@@ -2362,6 +2122,52 @@
                 "    dim_FinAccount = Source{[Schema=\"dim\",Item=\"FinAccount\"]}[Data]",
                 "in",
                 "    dim_FinAccount"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "UserDepartment",
+        "columns": [
+          {
+            "name": "UserName",
+            "dataType": "string",
+            "sourceColumn": "UserName"
+          },
+          {
+            "name": "Department Code",
+            "dataType": "string",
+            "sourceColumn": "Department Code"
+          },
+          {
+            "name": "Active",
+            "dataType": "boolean",
+            "sourceColumn": "Active"
+          },
+          {
+            "name": "ActivatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ActivatedDate"
+          },
+          {
+            "name": "DeActivatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DeActivatedDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    fin_vwActiveDepartmentUsers = Source{[Schema=\"fin\",Item=\"vwActiveDepartmentUsers\"]}[Data]",
+                "in",
+                "    fin_vwActiveDepartmentUsers"
               ]
             }
           }
@@ -2461,20 +2267,6 @@
         "toColumn": "Date"
       },
       {
-        "name": "3eebfa8b-a369-4694-842d-cd3a9a6ae339",
-        "fromTable": "fact vwSalaryExpenses",
-        "fromColumn": "Posting Date",
-        "toTable": "Dates",
-        "toColumn": "Date"
-      },
-      {
-        "name": "4ed4d46e-b0d5-4e8f-9952-53186ffa4581",
-        "fromTable": "fact vwSalaryExpenses",
-        "fromColumn": "Account",
-        "toTable": "Account",
-        "toColumn": "Id"
-      },
-      {
         "name": "715dc4c7-5a26-40e7-aa7a-e36556d900e5",
         "fromTable": "Salary Expense Totals",
         "fromColumn": "Account",
@@ -2501,13 +2293,6 @@
         "fromColumn": "Expense Cost Type",
         "toTable": "Expense Cost Type",
         "toColumn": "Id"
-      },
-      {
-        "name": "95eada78-db26-4207-a890-9c9b590e2490",
-        "fromTable": "UserDepartment",
-        "fromColumn": "Department Code",
-        "toTable": "Department",
-        "toColumn": "Department Code"
       },
       {
         "name": "1b2c2026-845a-49a1-8988-f29e0cd88948",
@@ -2543,6 +2328,13 @@
         "fromColumn": "Posting Date",
         "toTable": "dim FinDate",
         "toColumn": "Date"
+      },
+      {
+        "name": "f14a4bfb-cc24-4c09-8fb4-41188e6822b5",
+        "fromTable": "UserDepartment",
+        "fromColumn": "Department Code",
+        "toTable": "Department",
+        "toColumn": "Department Code"
       }
     ],
     "roles": [
@@ -2568,7 +2360,12 @@
         "members": [
           {
             "memberName": "testbiuser4@cla.co.uk",
-            "memberId": "testbiuser4@cla.co.uk#AzureAD",
+            "memberId": "testbiuser4@cla.co.uk",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "testbiuser5@cla.co.uk",
+            "memberId": "testbiuser5@cla.co.uk",
             "identityProvider": "AzureAD"
           }
         ],
@@ -2778,23 +2575,6 @@
             ]
           },
           {
-            "name": "UserDepartment",
-            "columnPermissions": [
-              {
-                "name": "ID",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "UserName",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Department Code",
-                "metadataPermission": "none"
-              }
-            ]
-          },
-          {
             "name": "Transactions",
             "columnPermissions": [
               {
@@ -2927,9 +2707,6 @@
                 "name": "Department Code"
               }
             ]
-          },
-          {
-            "name": "Fixed Asset"
           }
         ]
       },
@@ -2941,13 +2718,14 @@
             "memberName": "testbiuser2@cla.co.uk",
             "memberId": "testbiuser2@cla.co.uk",
             "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "testbiuser5@cla.co.uk",
+            "memberId": "testbiuser5@cla.co.uk",
+            "identityProvider": "AzureAD"
           }
         ],
         "tablePermissions": [
-          {
-            "name": "fact vwSalaryExpenses",
-            "metadataPermission": "none"
-          },
           {
             "name": "Salary Expense Totals",
             "metadataPermission": "none"
@@ -2959,10 +2737,6 @@
           {
             "name": "Fixed Asset",
             "metadataPermission": "none"
-          },
-          {
-            "name": "UserDepartment",
-            "metadataPermission": "none"
           }
         ]
       },
@@ -2973,6 +2747,11 @@
           {
             "memberName": "testbiuser3@cla.co.uk",
             "memberId": "testbiuser3@cla.co.uk",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "testbiuser5@cla.co.uk",
+            "memberId": "testbiuser5@cla.co.uk",
             "identityProvider": "AzureAD"
           }
         ],

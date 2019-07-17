@@ -1,0 +1,7 @@
+C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Production\Finance.asdatabase
+C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Production\Finance.deploymenttargets
+C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Production\Finance.deploymentoptions
+C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Production\CLA_Finance_BI.smproj.CoreCompileInputs.cache
+C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Production\Finance.asdatabase
+C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Production\Finance.deploymentoptions
+C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\obj\Production\Finance.deploymenttargets

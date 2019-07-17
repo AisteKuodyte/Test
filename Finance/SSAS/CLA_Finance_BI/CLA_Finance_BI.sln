@@ -8,11 +8,15 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|x86 = Development|x86
+		Production|x86 = Production|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{54274F17-634F-4BB4-A098-A51932B98850}.Development|x86.ActiveCfg = Development|x86
 		{54274F17-634F-4BB4-A098-A51932B98850}.Development|x86.Build.0 = Development|x86
 		{54274F17-634F-4BB4-A098-A51932B98850}.Development|x86.Deploy.0 = Development|x86
+		{54274F17-634F-4BB4-A098-A51932B98850}.Production|x86.ActiveCfg = Production|x86
+		{54274F17-634F-4BB4-A098-A51932B98850}.Production|x86.Build.0 = Production|x86
+		{54274F17-634F-4BB4-A098-A51932B98850}.Production|x86.Deploy.0 = Production|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

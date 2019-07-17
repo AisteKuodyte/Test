@@ -1,10 +1,3 @@
-C:\Users\vamsi.bora\Downloads\CLA_Finance_BI\bin\Finance.asdatabase
-C:\Users\vamsi.bora\Downloads\CLA_Finance_BI\bin\Finance.deploymenttargets
-C:\Users\vamsi.bora\Downloads\CLA_Finance_BI\bin\Finance.deploymentoptions
-C:\Users\vamsi.bora\Downloads\CLA_Finance_BI\obj\Development\CLA_Finance_BI.smproj.CoreCompileInputs.cache
-C:\Users\vamsi.bora\Downloads\CLA_Finance_BI\obj\Development\Finance.asdatabase
-C:\Users\vamsi.bora\Downloads\CLA_Finance_BI\obj\Development\Finance.deploymentoptions
-C:\Users\vamsi.bora\Downloads\CLA_Finance_BI\obj\Development\Finance.deploymenttargets
 C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Finance.asdatabase
 C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Finance.deploymenttargets
 C:\Vamsi\CLA\BI\dex-bi\Finance\SSAS\CLA_Finance_BI\CLA_Finance_BI\bin\Finance.deploymentoptions
