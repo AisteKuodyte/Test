@@ -20,7 +20,9 @@
         "options": {},
         "credential": {
           "AuthenticationKind": "UsernamePassword",
-          "Username": "clabisqlprdetl ",
+          "kind": "SQL",
+          "path": "cla-bi-prd.database.windows.net;bi_prd",
+          "Username": "clabisqlprdssas",
           "EncryptConnection": true
         }
       }
@@ -2352,6 +2354,16 @@
             "memberName": "testbiuser5@cla.co.uk",
             "memberId": "testbiuser5@cla.co.uk",
             "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "obj:e0204f6a-0e27-4e7a-b7df-ea808c76f85d@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:e0204f6a-0e27-4e7a-b7df-ea808c76f85d@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "testbiuser3@cla.co.uk",
+            "memberId": "testbiuser3@cla.co.uk",
+            "identityProvider": "AzureAD"
           }
         ],
         "tablePermissions": [
@@ -2359,164 +2371,124 @@
             "name": "Transactions",
             "columnPermissions": [
               {
-                "name": "Id",
-                "metadataPermission": "none"
+                "name": "Id"
               },
               {
-                "name": "TransId",
-                "metadataPermission": "none"
+                "name": "TransId"
               },
               {
-                "name": "Line_ID",
-                "metadataPermission": "none"
+                "name": "Line_ID"
               },
               {
-                "name": "Account",
-                "metadataPermission": "none"
+                "name": "Account"
               },
               {
-                "name": "Fee Category",
-                "metadataPermission": "none"
+                "name": "Fee Category"
               },
               {
-                "name": "Licence Type",
-                "metadataPermission": "none"
+                "name": "Licence Type"
               },
               {
-                "name": "Title Type",
-                "metadataPermission": "none"
+                "name": "Title Type"
               },
               {
-                "name": "Department",
-                "metadataPermission": "none"
+                "name": "Department"
               },
               {
-                "name": "Income Sector",
-                "metadataPermission": "none"
+                "name": "Income Sector"
               },
               {
-                "name": "Income Type",
-                "metadataPermission": "none"
+                "name": "Income Type"
               },
               {
-                "name": "Country",
-                "metadataPermission": "none"
+                "name": "Country"
               },
               {
-                "name": "Distribution Sector",
-                "metadataPermission": "none"
+                "name": "Distribution Sector"
               },
               {
-                "name": "Undistributed Account Code",
-                "metadataPermission": "none"
+                "name": "Undistributed Account Code"
               },
               {
-                "name": "Expense Cost Type",
-                "metadataPermission": "none"
+                "name": "Expense Cost Type"
               },
               {
-                "name": "AdminFeePercent",
-                "metadataPermission": "none"
+                "name": "AdminFeePercent"
               },
               {
-                "name": "Posting Date",
-                "metadataPermission": "none"
+                "name": "Posting Date"
               },
               {
-                "name": "Debit",
-                "metadataPermission": "none"
+                "name": "Debit"
               },
               {
-                "name": "Credit",
-                "metadataPermission": "none"
+                "name": "Credit"
               },
               {
-                "name": "Contract Account",
-                "metadataPermission": "none"
+                "name": "Contract Account"
               },
               {
-                "name": "Description",
-                "metadataPermission": "none"
+                "name": "Description"
               },
               {
-                "name": "Invoice Number",
-                "metadataPermission": "none"
+                "name": "Invoice Number"
               },
               {
-                "name": "Invoice Reference",
-                "metadataPermission": "none"
+                "name": "Invoice Reference"
               },
               {
-                "name": "Document Date",
-                "metadataPermission": "none"
+                "name": "Document Date"
               },
               {
-                "name": "VAT Group",
-                "metadataPermission": "none"
+                "name": "VAT Group"
               },
               {
-                "name": "VAT Amount",
-                "metadataPermission": "none"
+                "name": "VAT Amount"
               },
               {
-                "name": "BaseSum",
-                "metadataPermission": "none"
+                "name": "BaseSum"
               },
               {
-                "name": "Income Budget",
-                "metadataPermission": "none"
+                "name": "Income Budget"
               },
               {
-                "name": "Income Daily Budget",
-                "metadataPermission": "none"
+                "name": "Income Daily Budget"
               },
               {
-                "name": "Expenses Budget",
-                "metadataPermission": "none"
+                "name": "Expenses Budget"
               },
               {
-                "name": "Expenses Daily Budget",
-                "metadataPermission": "none"
+                "name": "Expenses Daily Budget"
               },
               {
-                "name": "RecordType",
-                "metadataPermission": "none"
+                "name": "RecordType"
               },
               {
-                "name": "Admin Fee %",
-                "metadataPermission": "none"
+                "name": "Admin Fee %"
               },
               {
-                "name": "Admin Fee Actual",
-                "metadataPermission": "none"
+                "name": "Admin Fee Actual"
               },
               {
-                "name": "Income Reforecast",
-                "metadataPermission": "none"
+                "name": "Income Reforecast"
               },
               {
-                "name": "Income Daily Reforecast",
-                "metadataPermission": "none"
+                "name": "Income Daily Reforecast"
               },
               {
-                "name": "Expenses Reforecast",
-                "metadataPermission": "none"
+                "name": "Expenses Reforecast"
               },
               {
-                "name": "Expenses Daily Reforecast",
-                "metadataPermission": "none"
+                "name": "Expenses Daily Reforecast"
               },
               {
-                "name": "Income Daily Forecast",
-                "metadataPermission": "none"
+                "name": "Income Daily Forecast"
               },
               {
-                "name": "DW_CreatedDate",
-                "metadataPermission": "none"
+                "name": "DW_CreatedDate"
               },
               {
-                "name": "DW_ModifiedDate",
-                "metadataPermission": "none"
+                "name": "DW_ModifiedDate"
               }
             ]
           }
@@ -2529,6 +2501,11 @@
           {
             "memberName": "testbiuser1@cla.co.uk",
             "memberId": "testbiuser1@cla.co.uk",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "obj:079ef42d-5561-4fcd-8654-c2c50448153e@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:079ef42d-5561-4fcd-8654-c2c50448153e@375ffe77-10b4-4411-b5e5-823e456f4596",
             "identityProvider": "AzureAD"
           }
         ],
@@ -2682,138 +2659,37 @@
         "modelPermission": "read",
         "members": [
           {
-            "memberName": "testbiuser2@cla.co.uk",
-            "memberId": "testbiuser2@cla.co.uk",
+            "memberName": "obj:f5008c04-cc7b-4a5b-86f2-5c4398750a8c@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:f5008c04-cc7b-4a5b-86f2-5c4398750a8c@375ffe77-10b4-4411-b5e5-823e456f4596",
             "identityProvider": "AzureAD"
           },
           {
-            "memberName": "testbiuser5@cla.co.uk",
-            "memberId": "testbiuser5@cla.co.uk",
+            "memberName": "testbiuser2_cla.co.uk#EXT#@claliveoutlook.onmicrosoft.com",
+            "memberId": "testbiuser2_cla.co.uk#EXT#@claliveoutlook.onmicrosoft.com",
             "identityProvider": "AzureAD"
           }
         ],
         "tablePermissions": [
           {
             "name": "Salary Expense Totals",
-            "metadataPermission": "none"
+            "filterExpression": "'Salary Expense Totals'[Department Code]=\"Not Visible to staff. do not delete this filter\""
           },
           {
             "name": "Expenses",
-            "metadataPermission": "none"
-          },
-          {
-            "name": "Fixed Asset",
-            "columnPermissions": [
-              {
-                "name": "Id",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "ItemCode",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "ItemName",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "ItmsGrpCode",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "AssetClass",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "AssetGroup",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "AsstStatus",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "CapDate",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "AcqDate",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "RetDate",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "DprStart",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "DprEnd",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "OcrCode",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "APC",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "CreatedDate",
-                "metadataPermission": "none"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "PM",
-        "modelPermission": "read",
-        "members": [
-          {
-            "memberName": "testbiuser5@cla.co.uk",
-            "memberId": "testbiuser5@cla.co.uk",
-            "identityProvider": "AzureAD"
-          }
-        ],
-        "tablePermissions": [
-          {
-            "name": "Expenses",
-            "filterExpression": [
-              "Expenses[Department Code] IN SELECTCOLUMNS(",
-              "\tFILTER(",
-              "\t\t'UserDepartment',",
-              "\t\tUserDepartment[UserName]=USERNAME()",
-              "\t),",
-              "\t\"Department Code\",",
-              "\t[Department Code]",
-              ")"
-            ]
-          },
-          {
-            "name": "ExpenseAccount",
-            "filterExpression": " ExpenseAccount[Is Salary Account]=FALSE"
-          },
-          {
-            "name": "Salary Expense Totals",
-            "filterExpression": [
-              "'Salary Expense Totals'[Department Code] IN SELECTCOLUMNS(",
-              "\tFILTER(",
-              "\t\t'UserDepartment',",
-              "\t\tUserDepartment[UserName]=USERNAME()",
-              "\t),",
-              "\t\"Department Code\",",
-              "\t[Department Code]",
-              ")"
-            ]
+            "filterExpression": "Expenses[Department Code]=\"Not Visible to staff. do not delete this filter\""
           }
         ]
       },
       {
         "name": "Operations Head",
         "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "obj:3da6e2f5-50df-4a10-b3cd-e273253ae918@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:3da6e2f5-50df-4a10-b3cd-e273253ae918@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ],
         "tablePermissions": [
           {
             "name": "Salary Expense Totals",
@@ -2828,6 +2704,13 @@
       {
         "name": "CTO COO",
         "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "obj:acb123b0-b570-4e8e-9177-4166dc15873f@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:acb123b0-b570-4e8e-9177-4166dc15873f@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ],
         "tablePermissions": [
           {
             "name": "Expenses",
@@ -2842,6 +2725,13 @@
       {
         "name": "Sales Head",
         "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "obj:3346c496-8815-466d-9a1d-597d30b9cfd8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:3346c496-8815-466d-9a1d-597d30b9cfd8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ],
         "tablePermissions": [
           {
             "name": "Expenses",
@@ -2854,8 +2744,15 @@
         ]
       },
       {
-        "name": "Strtegy And Digital Director",
+        "name": "Strategy And Digital Director",
         "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "obj:2afc51aa-7388-474f-b30b-2b3f5ed19724@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:2afc51aa-7388-474f-b30b-2b3f5ed19724@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ],
         "tablePermissions": [
           {
             "name": "Expenses",
@@ -2864,6 +2761,42 @@
           {
             "name": "Salary Expense Totals",
             "filterExpression": " 'Salary Expense Totals'[Department Code]=\"D510\" || 'Salary Expense Totals'[Department Code]=\"D520\""
+          }
+        ]
+      },
+      {
+        "name": "Admin",
+        "modelPermission": "administrator",
+        "members": [
+          {
+            "memberName": "obj:8d1e6bad-1bab-4523-addb-13e7d25d3bd8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:8d1e6bad-1bab-4523-addb-13e7d25d3bd8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "Project Managers",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "obj:f68be86e-b678-434f-bbb3-d840d8d62aa8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:f68be86e-b678-434f-bbb3-d840d8d62aa8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "ExpenseAccount",
+            "filterExpression": " ExpenseAccount[Is Salary Account]=FALSE"
+          },
+          {
+            "name": "Expenses",
+            "filterExpression": " Expenses[Department Code]=\"D621\" || Expenses[Department Code]=\"D622\" || Expenses[Department Code]=\"D623\" || Expenses[Department Code]=\"D940\" || Expenses[Department Code]=\"D942\""
+          },
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": "'Salary Expense Totals'[Department Code]=\"D621\" ||'Salary Expense Totals'[Department Code]=\"D622\"||'Salary Expense Totals'[Department Code]=\"D623\"||'Salary Expense Totals'[Department Code]=\"D940\"||'Salary Expense Totals'[Department Code]=\"D942\""
           }
         ]
       }
