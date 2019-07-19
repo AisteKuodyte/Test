@@ -2340,22 +2340,6 @@
     ],
     "roles": [
       {
-        "name": "Admin",
-        "modelPermission": "read",
-        "members": [
-          {
-            "memberName": "vamsi.bora@cla.co.uk",
-            "memberId": "vamsi.bora@cla.co.uk#AzureAD",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "Aiste.Kuodyte@cla.co.uk",
-            "memberId": "Aiste.Kuodyte@cla.co.uk#AzureAD",
-            "identityProvider": "AzureAD"
-          }
-        ]
-      },
-      {
         "name": "Finance",
         "modelPermission": "read",
         "members": [
@@ -2539,7 +2523,7 @@
         ]
       },
       {
-        "name": "Department Heads",
+        "name": "Education Head",
         "modelPermission": "read",
         "members": [
           {
@@ -2551,29 +2535,11 @@
         "tablePermissions": [
           {
             "name": "Expenses",
-            "filterExpression": [
-              "Expenses[Department Code] IN SELECTCOLUMNS(",
-              "\tFILTER(",
-              "\t\t'UserDepartment',",
-              "\t\tUserDepartment[UserName]=USERNAME()",
-              "\t),",
-              "\t\"Department Code\",",
-              "\t[Department Code]",
-              ")"
-            ]
+            "filterExpression": "Expenses[Department Code]=\"D535\""
           },
           {
             "name": "Salary Expense Totals",
-            "filterExpression": [
-              "'Salary Expense Totals'[Department Code] IN SELECTCOLUMNS(",
-              "\tFILTER(",
-              "\t\t'UserDepartment',",
-              "\t\tUserDepartment[UserName]=USERNAME()",
-              "\t),",
-              "\t\"Department Code\",",
-              "\t[Department Code]",
-              ")"
-            ]
+            "filterExpression": "'Salary Expense Totals'[Department Code]=\"D535\""
           },
           {
             "name": "Transactions",
@@ -2712,7 +2678,7 @@
         ]
       },
       {
-        "name": "Others",
+        "name": "CLA Staff",
         "modelPermission": "read",
         "members": [
           {
@@ -2737,7 +2703,68 @@
           },
           {
             "name": "Fixed Asset",
-            "metadataPermission": "none"
+            "columnPermissions": [
+              {
+                "name": "Id",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "ItemCode",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "ItemName",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "ItmsGrpCode",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "AssetClass",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "AssetGroup",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "AsstStatus",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "CapDate",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "AcqDate",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "RetDate",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "DprStart",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "DprEnd",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "OcrCode",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "APC",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "CreatedDate",
+                "metadataPermission": "none"
+              }
+            ]
           }
         ]
       },
@@ -2745,11 +2772,6 @@
         "name": "PM",
         "modelPermission": "read",
         "members": [
-          {
-            "memberName": "testbiuser3@cla.co.uk",
-            "memberId": "testbiuser3@cla.co.uk",
-            "identityProvider": "AzureAD"
-          },
           {
             "memberName": "testbiuser5@cla.co.uk",
             "memberId": "testbiuser5@cla.co.uk",
@@ -2786,6 +2808,62 @@
               "\t[Department Code]",
               ")"
             ]
+          }
+        ]
+      },
+      {
+        "name": "Operations Head",
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": "'Salary Expense Totals'[Department Code]=\"D620\""
+          },
+          {
+            "name": "Expenses",
+            "filterExpression": "Expenses[Department Code]=\"D620\""
+          }
+        ]
+      },
+      {
+        "name": "CTO COO",
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "Expenses",
+            "filterExpression": "Expenses[Department Code]=\"D610\""
+          },
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": " 'Salary Expense Totals'[Department Code]=\"D610\""
+          }
+        ]
+      },
+      {
+        "name": "Sales Head",
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "Expenses",
+            "filterExpression": "Expenses[Department Code]=\"D530\""
+          },
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": "'Salary Expense Totals'[Department Code]=\"D530\""
+          }
+        ]
+      },
+      {
+        "name": "Strtegy And Digital Director",
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "Expenses",
+            "filterExpression": "Expenses[Department Code]=\"D510\" || Expenses[Department Code]=\"D520\""
+          },
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": " 'Salary Expense Totals'[Department Code]=\"D510\" || 'Salary Expense Totals'[Department Code]=\"D520\""
           }
         ]
       }
