@@ -11,8 +11,8 @@
         "connectionDetails": {
           "protocol": "tds",
           "address": {
-            "server": "cla-bi-prd.database.windows.net",
-            "database": "bi_prd"
+            "server": "azdbsvr02-preprd-dev-dxdw.database.windows.net",
+            "database": "datawarehouse_dev"
           },
           "authentication": null,
           "query": null
@@ -20,9 +20,7 @@
         "options": {},
         "credential": {
           "AuthenticationKind": "UsernamePassword",
-          "kind": "SQL",
-          "path": "cla-bi-prd.database.windows.net;bi_prd",
-          "Username": "clabisqlprdssas",
+          "Username": "cla_etl",
           "EncryptConnection": true
         }
       }

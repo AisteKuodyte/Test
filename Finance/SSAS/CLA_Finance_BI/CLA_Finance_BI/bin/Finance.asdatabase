@@ -19,6 +19,8 @@
         },
         "credential": {
           "AuthenticationKind": "UsernamePassword",
+          "kind": "SQL",
+          "path": "cla-bi-prd.database.windows.net;bi_prd",
           "Username": "clabisqlprdssas",
           "EncryptConnection": true
         }
@@ -2356,6 +2358,11 @@
             "memberName": "obj:e0204f6a-0e27-4e7a-b7df-ea808c76f85d@375ffe77-10b4-4411-b5e5-823e456f4596",
             "memberId": "obj:e0204f6a-0e27-4e7a-b7df-ea808c76f85d@375ffe77-10b4-4411-b5e5-823e456f4596",
             "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "testbiuser3@cla.co.uk",
+            "memberId": "testbiuser3@cla.co.uk",
+            "identityProvider": "AzureAD"
           }
         ],
         "tablePermissions": [
@@ -2664,45 +2671,11 @@
         "tablePermissions": [
           {
             "name": "Salary Expense Totals",
-            "metadataPermission": "none"
+            "filterExpression": "'Salary Expense Totals'[Department Code]=\"Not Visible to staff. do not delete this filter\""
           },
           {
             "name": "Expenses",
-            "metadataPermission": "none"
-          },
-          {
-            "name": "Fixed Asset",
-            "metadataPermission": "none"
-          }
-        ]
-      },
-      {
-        "name": "Project Managers",
-        "modelPermission": "read",
-        "members": [
-          {
-            "memberName": "testbiuser5@cla.co.uk",
-            "memberId": "testbiuser5@cla.co.uk",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "obj:f68be86e-b678-434f-bbb3-d840d8d62aa8@375ffe77-10b4-4411-b5e5-823e456f4596",
-            "memberId": "obj:f68be86e-b678-434f-bbb3-d840d8d62aa8@375ffe77-10b4-4411-b5e5-823e456f4596",
-            "identityProvider": "AzureAD"
-          }
-        ],
-        "tablePermissions": [
-          {
-            "name": "Expenses",
-            "filterExpression": "Expenses[Department Code]=\"D621\" || Expenses[Department Code]=\"D622\" ||  Expenses[Department Code]=\"D940\" || Expenses[Department Code]=\"D942\""
-          },
-          {
-            "name": "ExpenseAccount",
-            "filterExpression": " ExpenseAccount[Is Salary Account]=FALSE"
-          },
-          {
-            "name": "Salary Expense Totals",
-            "filterExpression": "'Salary Expense Totals'[Department Code]=\"D621\"||'Salary Expense Totals'[Department Code]=\"D622\"||'Salary Expense Totals'[Department Code]=\"D623\"||'Salary Expense Totals'[Department Code]=\"D940\"||'Salary Expense Totals'[Department Code]=\"D942\""
+            "filterExpression": "Expenses[Department Code]=\"Not Visible to staff. do not delete this filter\""
           }
         ]
       },
@@ -2798,6 +2771,31 @@
             "memberName": "obj:8d1e6bad-1bab-4523-addb-13e7d25d3bd8@375ffe77-10b4-4411-b5e5-823e456f4596",
             "memberId": "obj:8d1e6bad-1bab-4523-addb-13e7d25d3bd8@375ffe77-10b4-4411-b5e5-823e456f4596",
             "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "Project Managers",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "obj:f68be86e-b678-434f-bbb3-d840d8d62aa8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "memberId": "obj:f68be86e-b678-434f-bbb3-d840d8d62aa8@375ffe77-10b4-4411-b5e5-823e456f4596",
+            "identityProvider": "AzureAD"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "ExpenseAccount",
+            "filterExpression": " ExpenseAccount[Is Salary Account]=FALSE"
+          },
+          {
+            "name": "Expenses",
+            "filterExpression": " Expenses[Department Code]=\"D621\" || Expenses[Department Code]=\"D622\" || Expenses[Department Code]=\"D623\" || Expenses[Department Code]=\"D940\" || Expenses[Department Code]=\"D942\""
+          },
+          {
+            "name": "Salary Expense Totals",
+            "filterExpression": "'Salary Expense Totals'[Department Code]=\"D621\" ||'Salary Expense Totals'[Department Code]=\"D622\"||'Salary Expense Totals'[Department Code]=\"D623\"||'Salary Expense Totals'[Department Code]=\"D940\"||'Salary Expense Totals'[Department Code]=\"D942\""
           }
         ]
       }
