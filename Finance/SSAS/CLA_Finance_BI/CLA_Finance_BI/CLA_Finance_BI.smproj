@@ -16,7 +16,7 @@
     <DeploymentServerName>asazure://northeurope.asazure.windows.net/bianalysisservicesdev</DeploymentServerName>
     <DeploymentServerEdition>Developer</DeploymentServerEdition>
     <DeploymentServerVersion>Version_13_0</DeploymentServerVersion>
-    <DeploymentServerDatabase>CLA_Finance_BI_Test</DeploymentServerDatabase>
+    <DeploymentServerDatabase>CLA_Finance_BI</DeploymentServerDatabase>
     <DeploymentServerCubeName>Finance</DeploymentServerCubeName>
     <DeploymentOptionProcessing>Full</DeploymentOptionProcessing>
     <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>

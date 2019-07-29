@@ -1,5 +1,5 @@
 {
-  "name": "CLA_Finance_BI_Test",
+  "name": "CLA_Finance_BI",
   "compatibilityLevel": 1400,
   "model": {
     "name": "Finance",
@@ -11,8 +11,8 @@
         "connectionDetails": {
           "protocol": "tds",
           "address": {
-            "server": "cla-bi-prd.database.windows.net",
-            "database": "bi_prd"
+            "server": "azdbsvr02-preprd-dev-dxdw.database.windows.net",
+            "database": "datawarehouse_dev"
           },
           "authentication": null,
           "query": null
@@ -20,8 +20,8 @@
         "credential": {
           "AuthenticationKind": "UsernamePassword",
           "kind": "SQL",
-          "path": "cla-bi-prd.database.windows.net;bi_prd",
-          "Username": "clabisqlprdssas",
+          "path": "azdbsvr02-preprd-dev-dxdw.database.windows.net;datawarehouse_dev",
+          "Username": "cla_etl",
           "EncryptConnection": true
         }
       }
@@ -70,6 +70,14 @@
             "name": "Is Salary Account",
             "dataType": "boolean",
             "sourceColumn": "Is Salary Account"
+          },
+          {
+            "type": "calculated",
+            "name": "IsStartingWith5",
+            "dataType": "boolean",
+            "isDataTypeInferred": true,
+            "expression": " search(\"5\",Account[Account Code],1,0)=1",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
           }
         ],
         "partitions": [
@@ -2174,6 +2182,77 @@
             }
           }
         ]
+      },
+      {
+        "name": "Income Account",
+        "columns": [
+          {
+            "name": "Id",
+            "dataType": "int64",
+            "sourceColumn": "Id"
+          },
+          {
+            "name": "Account Code",
+            "dataType": "string",
+            "sourceColumn": "Account Code"
+          },
+          {
+            "name": "Account Name",
+            "dataType": "string",
+            "sourceColumn": "Account Name"
+          },
+          {
+            "name": "Expense High Level Account",
+            "dataType": "string",
+            "sourceColumn": "Expense High Level Account"
+          },
+          {
+            "name": "TB_Mapping",
+            "dataType": "string",
+            "sourceColumn": "TB_Mapping"
+          },
+          {
+            "name": "Expense Ranking",
+            "dataType": "int64",
+            "sourceColumn": "Expense Ranking"
+          },
+          {
+            "name": "TB Ranking",
+            "dataType": "int64",
+            "sourceColumn": "TB Ranking"
+          },
+          {
+            "name": "Is Salary Account",
+            "dataType": "boolean",
+            "sourceColumn": "Is Salary Account"
+          },
+          {
+            "name": "DW_CreatedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_CreatedDate"
+          },
+          {
+            "name": "DW_ModifiedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DW_ModifiedDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/azdbsvr02-preprd-dev-dxdw database windows net;datawarehouse_dev\",",
+                "    dim_FinAccount = Source{[Schema=\"dim\",Item=\"FinAccount\"]}[Data]",
+                "in",
+                "    dim_FinAccount"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -2337,6 +2416,13 @@
         "fromColumn": "Department Code",
         "toTable": "Department",
         "toColumn": "Department Code"
+      },
+      {
+        "name": "cb532da8-9422-4e4b-9900-146176b20360",
+        "fromTable": "Transactions",
+        "fromColumn": "Account",
+        "toTable": "Income Account",
+        "toColumn": "Id"
       }
     ],
     "roles": [
@@ -2345,23 +2431,8 @@
         "modelPermission": "read",
         "members": [
           {
-            "memberName": "testbiuser4@cla.co.uk",
-            "memberId": "testbiuser4@cla.co.uk",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "testbiuser5@cla.co.uk",
-            "memberId": "testbiuser5@cla.co.uk",
-            "identityProvider": "AzureAD"
-          },
-          {
             "memberName": "obj:e0204f6a-0e27-4e7a-b7df-ea808c76f85d@375ffe77-10b4-4411-b5e5-823e456f4596",
             "memberId": "obj:e0204f6a-0e27-4e7a-b7df-ea808c76f85d@375ffe77-10b4-4411-b5e5-823e456f4596",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "testbiuser3@cla.co.uk",
-            "memberId": "testbiuser3@cla.co.uk",
             "identityProvider": "AzureAD"
           }
         ],
@@ -2497,11 +2568,6 @@
         "name": "Education Head",
         "modelPermission": "read",
         "members": [
-          {
-            "memberName": "testbiuser1@cla.co.uk",
-            "memberId": "testbiuser1@cla.co.uk",
-            "identityProvider": "AzureAD"
-          },
           {
             "memberName": "obj:079ef42d-5561-4fcd-8654-c2c50448153e@375ffe77-10b4-4411-b5e5-823e456f4596",
             "memberId": "obj:079ef42d-5561-4fcd-8654-c2c50448153e@375ffe77-10b4-4411-b5e5-823e456f4596",
@@ -2661,11 +2727,6 @@
             "memberName": "obj:f5008c04-cc7b-4a5b-86f2-5c4398750a8c@375ffe77-10b4-4411-b5e5-823e456f4596",
             "memberId": "obj:f5008c04-cc7b-4a5b-86f2-5c4398750a8c@375ffe77-10b4-4411-b5e5-823e456f4596",
             "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "testbiuser2_cla.co.uk#EXT#@claliveoutlook.onmicrosoft.com",
-            "memberId": "testbiuser2_cla.co.uk#EXT#@claliveoutlook.onmicrosoft.com",
-            "identityProvider": "AzureAD"
           }
         ],
         "tablePermissions": [
@@ -2676,6 +2737,10 @@
           {
             "name": "Expenses",
             "filterExpression": "Expenses[Department Code]=\"Not Visible to staff. do not delete this filter\""
+          },
+          {
+            "name": "Income Account",
+            "filterExpression": " SEARCH(\"5\",'Income Account'[Account Code],1,0) =1"
           }
         ]
       },
