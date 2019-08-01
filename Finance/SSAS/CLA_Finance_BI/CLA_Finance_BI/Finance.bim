@@ -22,7 +22,7 @@
           "AuthenticationKind": "UsernamePassword",
           "kind": "SQL",
           "path": "azdbsvr02-preprd-dev-dxdw.database.windows.net;datawarehouse_dev",
-          "Username": "cla_etl",
+          "Username": "Cla_etl",
           "EncryptConnection": true
         }
       }
@@ -2335,13 +2335,6 @@
         "toColumn": "Id"
       },
       {
-        "name": "2d201d94-f640-4e84-9a31-2414a06be18b",
-        "fromTable": "Transactions",
-        "fromColumn": "Account",
-        "toTable": "CLA Income And Expenditure Mapping",
-        "toColumn": "id"
-      },
-      {
         "name": "b0b9ff05-e378-439b-a7c1-4efc78bb9190",
         "fromTable": "Expenses",
         "fromColumn": "Posting Date",
@@ -2424,6 +2417,20 @@
         "fromColumn": "Account",
         "toTable": "Income Account",
         "toColumn": "Id"
+      },
+      {
+        "name": "e5f56e79-cb22-4b4b-9afc-27c47500987d",
+        "fromTable": "Transactions",
+        "fromColumn": "Account",
+        "toTable": "CLA Income And Expenditure Mapping",
+        "toColumn": "id"
+      },
+      {
+        "name": "14ba3dd0-5a8b-4e01-b670-2f0ce67be57b",
+        "fromTable": "Expenses",
+        "fromColumn": "Account",
+        "toTable": "CLA Income And Expenditure Mapping",
+        "toColumn": "id"
       }
     ],
     "roles": [
